@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import './ResetPassword.css';
+import './style.css';
 
 function ResetPassword() {
   const location = useLocation();
@@ -13,6 +15,10 @@ function ResetPassword() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const useLocation = () => {
+
+  }
+
   const handleResetPassword = () => {
     // 새 비밀번호와 재확인 비밀번호가 일치하는지 확인
     if (newPassword !== confirmPassword) {
@@ -25,14 +31,22 @@ function ResetPassword() {
     // 이 예시에서는 비밀번호 초기화 후 로그인 페이지로 이동하는 것으로 대체합니다.
 
     // 비밀번호 초기화가 완료되면 로그인 페이지로 이동
-    navigate('/');
   };
 
-  return (
-    <div className="ResetPassword">
-      <h2>Reset Password</h2>
-      <p>Username: {username}</p>
-      <p>Email: {email}</p>
+  const handleBackToSignIn = () => {
+    // 로그인 페이지로 돌아가는 함수
+    navigate('/signin');
+  };
+  
+return (
+  <div className="background">
+    <div className="rectangle">
+      <div className="layer">
+        <div className="username-text">Reset Your Password</div>
+      </div>
+      <div className="layer">
+       <div className="explain-text">Please enter your new password</div>
+      </div>
       <div>
         <span className="label">New Password:</span>
         <input
@@ -49,9 +63,11 @@ function ResetPassword() {
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
       </div>
-      <button onClick={handleResetPassword}>OK</button>
+      <div className="layer">
+       <button3 onClick={handleBackToSignIn}>OK</button3> {/* 로그인 페이지로 이동하는 버튼 추가 */}
+      </div>
     </div>
-  );
+  </div>
+);
 }
-
 export default ResetPassword;

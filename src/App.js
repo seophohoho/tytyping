@@ -4,6 +4,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import FindUsername from './FindUsername';
 import FindPassword from './FindPassword';
+import ResetPassword from './ResetPassword';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/findusername" element={<FindUsername />} />
         <Route path="/findpassword" element={<FindPassword />} />
+        <Route path="/resetpassword" element={<ResetPassword />} />
       </Routes>
     </Router>
   );

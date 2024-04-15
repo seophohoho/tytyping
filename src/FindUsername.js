@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './FindUsername.css';
+import './style.css';
 
 function FindUsername() {
   const [email, setEmail] = useState('');
@@ -24,33 +26,35 @@ function FindUsername() {
   };
 
   return (
-    <div className="FindUsername">
+    <div className="background">
       <div className="rectangle">
-      {/* 첫 번째 층 */}
-      <div className="layer">
-        <div className="username-text">Forgot Your username?</div>
+        <div className="layer">
+          <div className="username-text">Forgot Your username?</div>
+        </div>
+        <div className="layer">
+         <div className="explain-text">Please enter your nickname && password</div>
+        </div>
+        <div className="layer">
+          <span className="label">email</span>
+          <input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div>
+          {searched && (
+          <p>Your Username: {username}</p>
+          )}
+        </div>
+        <div className="layer">
+          <button1 onClick={handleSearch}>Ok</button1>
+        </div>
+        <div className="layer">
+         <button3 onClick={handleBackToSignIn}>Sign-In</button3> {/* 로그인 페이지로 이동하는 버튼 추가 */}
+        </div>
       </div>
-      <div className="layer">
-        <div className="explain-text">Please enter your nickname && password</div>
-      </div>
-      <div className="layer">
-      <input
-        type="email"
-        placeholder="Enter your email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      </div>
-      <div>
-      {searched && (
-        <p>Your Username: {username}</p>
-      )}
-      </div>
-      <div>
-      <button onClick={handleSearch}>Ok</button>
-      </div>
-      <button onClick={handleBackToSignIn}>Back to Sign In</button> {/* 로그인 페이지로 이동하는 버튼 추가 */}
-    </div>
     </div>
   );
 }

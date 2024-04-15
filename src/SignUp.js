@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // 수정된 부분
 import './SignUp.css';
+import './style.css';
 
 function SignUp() {
   const [username, setUsername] = useState('');
@@ -31,14 +32,17 @@ function SignUp() {
         // 예시: 에러 메시지를 사용자에게 표시하거나 다시 시도할 수 있도록 처리
       });
   };
+  const handleSignIn = () => {
+    navigate('/signin');
+  };
 
   return (
-    <div className="SignUp">
+    <div className="background">
       <div className="rectangle">
-        <div className="layer">
+        <div className="SUlayer">
           <div className="signup-text1">Sign - Up</div>
         </div>
-        <div className="layer">
+        <div className="SUlayer">
           <span className="label">username</span>
           <input
             type="text"
@@ -47,7 +51,7 @@ function SignUp() {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        <div className="layer">
+        <div className="SUlayer">
           <span className="label">password</span>
           <input
             type="password"
@@ -56,7 +60,7 @@ function SignUp() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="layer">
+        <div className="SUlayer">
           <span className="label">nickname</span>
           <input
             type="text"
@@ -65,7 +69,7 @@ function SignUp() {
             onChange={(e) => setNickname(e.target.value)}
           />
         </div>
-        <div className="layer">
+        <div className="SUlayer">
           <span className="label">email</span>
           <input
             type="email"
@@ -74,11 +78,11 @@ function SignUp() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="layer">
-          <button onClick={handleSignUp}>Sign Up</button>
+        <div className="SUlayer">
+          <button1 onClick={handleSignUp}>Sign Up</button1>
         </div>
-        <div className="layer">
-          <div className="signup-text2">Sign-In</div>
+        <div className="SUlayer">
+          <button3 onClick={handleSignIn}>Sign-In</button3>
         </div>
       </div>
     </div>

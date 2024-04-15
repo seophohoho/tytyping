@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SignIn.css';
+import './style.css';
 
 function SignIn() {
   const [username, setUsername] = useState('');
@@ -50,14 +51,12 @@ function SignIn() {
   };
 
   return (
-      <div className="SignIn">
+      <div className="background">
         <div className="rectangle">
-          {/* 첫 번째 층 */}
-          <div className="SI layer">
+          <div className="SIlayer">
             <div className="signintext">Sign - In</div>
           </div>
-          {/* 두 번째 층 */}
-          <div className="SI layer">
+          <div className="SIlayer">
             <span className="label">username</span>
             <input
               type="text"
@@ -66,8 +65,7 @@ function SignIn() {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-          {/* 세 번째 층 */}
-          <div className="SI layer">
+          <div className="SIlayer">
             <span className="SignIn label">password</span>
             <input
               type="password"
@@ -76,19 +74,16 @@ function SignIn() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          {/* 네 번째 층 */}
-          <div className="SI layer">
-            <sinbutton onClick={handleLogin}>Sign - in</sinbutton>
+          <div className="SIlayer">
+            <button1 onClick={handleLogin}>Sign - in</button1>
           </div>
-          {/* 다섯 번째 층 */}
-          <div className="SI layer">
-            <fgbutton onClick={handleForgotUsername}>Forgot Your Username?</fgbutton>
+          <div className="SIlayer">
+            <button2 onClick={handleForgotUsername}>Forgot Your Username?</button2>
             <div>  |  </div>
-            <fgbutton onClick={handleForgotPassword}>Forgot Your Password?</fgbutton>
+            <button2 onClick={handleForgotPassword}>Forgot Your Password?</button2>
           </div>
-          {/* 여섯 번째 층 */}
-          <div className="SI layer">
-            <supbutton onClick={handleSignUp}>SIGN UP</supbutton>
+          <div className="SIlayer">
+            <button3 onClick={handleSignUp}>SIGN UP</button3>
           </div>
         </div>
       </div>

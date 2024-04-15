@@ -1,38 +1,55 @@
 import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function ResetPassword() {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // URL 쿼리 파라미터에서 username과 email을 가져옴
+  const queryParams = new URLSearchParams(location.search);
+  const username = queryParams.get('username');
+  const email = queryParams.get('email');
+
   const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleResetPassword = () => {
-    // 비밀번호 초기화 및 저장 로직 구현
-    // 사용자로부터 입력받은 username과 email을 사용하여 회원 정보를 찾고,
-    // 새로운 비밀번호를 저장하는 로직을 작성합니다.
+    // 새 비밀번호와 재확인 비밀번호가 일치하는지 확인
+    if (newPassword !== confirmPassword) {
+      alert('Passwords do not match. Please try again.');
+      return;
+    }
+
+    // 여기에는 비밀번호 초기화 및 변경 로직을 추가할 수 있습니다.
+    // 새 비밀번호를 서버로 전송하고, 서버에서 해당 유저의 비밀번호를 업데이트하는 등의 작업을 수행합니다.
+    // 이 예시에서는 비밀번호 초기화 후 로그인 페이지로 이동하는 것으로 대체합니다.
+
+    // 비밀번호 초기화가 완료되면 로그인 페이지로 이동
+    navigate('/');
   };
 
   return (
-    <div>
+    <div className="ResetPassword">
       <h2>Reset Password</h2>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="New Password"
-        value={newPassword}
-        onChange={(e) => setNewPassword(e.target.value)}
-      />
-      <button onClick={handleResetPassword}>Reset Password</button>
+      <p>Username: {username}</p>
+      <p>Email: {email}</p>
+      <div>
+        <span className="label">New Password:</span>
+        <input
+          type="password"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+        />
+      </div>
+      <div>
+        <span className="label">Confirm Password:</span>
+        <input
+          type="password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+      </div>
+      <button onClick={handleResetPassword}>OK</button>
     </div>
   );
 }

@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "plugin:prettier/recommended",
+    "react-app",
+    "airbnb",
+    "airbnb-typescript",
+    "prettier"
+  ],
+  "rules": {
+    "func-names": "off",
+    "import/prefer-default-export": "off",
+    "import/no-unresolved": "off",
+    "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }]
+  }
+}

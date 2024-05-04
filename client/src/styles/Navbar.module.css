@@ -1,0 +1,108 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+a,p {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}
+
+.logo,.navMenu,.navbar{
+    font-family: 'Courier Prime', Courier, monospace;
+}
+
+/* navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #E0E0E0;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; /* 요소들을 좌우로 분산 배치합니다. */
+    align-items: center; /* 세로 중앙 정렬 */
+    gap: 40px;
+    min-height: 60px;
+    z-index: 1000;
+    border: 2px solid black; /* border 추가 */
+}
+
+/* media queries */
+/* @media screen and (max-width: 780px) {
+    .navMenu {
+        position: relative;
+        flex-direction: column;
+        gap: 0;
+        top: auto;
+        left: auto;
+        text-align: start;
+        width: 100%;
+        transition: 0.7s ease-in-out;
+        background-color: #E0E0E0;
+        padding: 10px;
+        margin-top: 70px;
+    }
+} */
+
+/* logo  */
+.logo {
+    font-size: 30px;
+    margin-right: auto;
+}
+
+/* ul  */
+.navMenu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+    /* margin-left: auto; */
+}
+
+/* LogOut 버튼 추가 스타일 */
+.logout {
+    border: 1px solid black; /* border 추가 */
+}
+
+/* media queries */
+
+/* @media screen and (max-width: 780px) {
+    .bar {
+        background-color: #120f0b;
+        width: 20px;
+        height: 3px;
+        display: flex;
+        margin: 5px;
+        -webkit-transition: 0.3s ease-in-out;
+        transition: 0.3s ease-in-out;
+    }
+
+    .navMenu {
+        position: absolute;
+        flex-direction: column;
+        gap: 0;
+        top: 70px;
+        left: -100%;
+        text-align: start;
+        width: 100%;
+        transition: 0.7s ease-in-out;
+        background-color: #E0E0E0;
+        padding: 10px;
+    }
+
+    .navMenu.active {
+        left: 0;
+    }
+
+    .navMenu li {
+        margin: 16px 0;
+    }
+} */

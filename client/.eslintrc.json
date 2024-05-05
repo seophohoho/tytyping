@@ -1,11 +1,11 @@
 {
-  "extends": [
-    "plugin:prettier/recommended",
-    "react-app",
-    "airbnb",
-    "airbnb-typescript",
-    "prettier"
-  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "extends": ["plugin:prettier/recommended", "react-app", "airbnb", "airbnb-typescript", "prettier"],
   "rules": {
     "func-names": "off",
     "import/prefer-default-export": "off",

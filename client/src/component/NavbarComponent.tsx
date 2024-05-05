@@ -12,7 +12,9 @@ function NavbarComponent() {
           <p className={`${styles.navLink}`}>Nickname</p>
         </li>
         <li>
-          <p className={`${styles.navLink} ${styles.logout}`}>Log Out</p>
+          <button type="button" className={`${styles.navLink} ${styles.logout}`}>
+            Log Out
+          </button>
         </li>
       </ul>
     </div>

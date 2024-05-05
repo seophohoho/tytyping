@@ -52,5 +52,10 @@ p {
 
 /* LogOut 버튼 추가 스타일 */
 .logout {
-  border: 1px solid black; /* border 추가 */
+  font-family: 'Courier Prime', Courier, monospace;
+  border: 2px solid black; /* border 추가 */
+  font-size: 18px;
+  width: 120px;
+  height: 42px;
+  box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.2);
 }

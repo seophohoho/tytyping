@@ -1,0 +1,20 @@
+.mainBody {
+  height: calc(100vh - 90px);
+  /* height: 60px; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.matchingBtn {
+  font-family: 'Courier Prime', Courier, monospace;
+  justify-content: center;
+  align-content: center;
+  height: 51px;
+  width: 193px;
+  font-size: 24px;
+  border: 2px solid black;
+  box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.2);
+}

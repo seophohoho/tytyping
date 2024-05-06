@@ -23,7 +23,9 @@ function Main() {
   return (
     <div className={`${styles.App}`}>
       <NavbarComponent userInfo={nickname} />
-      <MatchingBtnComponent pageState={buttonState} />
+      <div className={`${styles.mainBody}`}>
+        <MatchingBtnComponent pageState={buttonState} />
+      </div>
       <FooterComponent />
     </div>
   );

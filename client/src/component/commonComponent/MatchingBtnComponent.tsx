@@ -10,18 +10,16 @@ function MatchingBtnComponent({ pageState }: { pageState: PageState }) {
 
   if (pageState.state === 'MATCHING') {
     toPath = '/matching-ready';
-  } else if (pageState.state === 'Cancel') {
+  } else if (pageState.state === 'CANCEL') {
     toPath = '/main';
   }
 
   return (
-    <div className={`${styles.mainBody}`}>
-      <Link to={toPath}>
-        <button type="button" className={`${styles.matchingBtn}`}>
-          {pageState.state}
-        </button>
-      </Link>
-    </div>
+    <Link to={toPath}>
+      <button type="button" className={`${styles.matchingBtn}`}>
+        {pageState.state}
+      </button>
+    </Link>
   );
 }
 

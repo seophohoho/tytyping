@@ -1,6 +1,7 @@
 import styles from '../styles/Navbar.module.css';
 
-function NavbarComponent() {
+function NavbarComponent(props: any) {
+  const { userInfo } = props;
   return (
     <div className={`${styles.navbar}`}>
       {/* logo */}
@@ -9,7 +10,7 @@ function NavbarComponent() {
       </a>
       <ul className={`${styles.navMenu}`}>
         <li>
-          <p className={`${styles.navLink}`}>Nickname</p>
+          <p className={`${styles.navLink}`}>{userInfo}</p>
         </li>
         <li>
           <button type="button" className={`${styles.navLink} ${styles.logout}`}>

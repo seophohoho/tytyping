@@ -3,7 +3,6 @@ import axios from 'axios';
 import NavbarComponent from './NavbarComponent';
 import MatchingBtnComponent from './MatchingBtnComponent';
 import styles from '../styles/Main.module.css';
-import FooterComponent from './FooterComponent';
 import { serverUrl } from '../config/serverUrl';
 
 function Main() {
@@ -23,7 +22,6 @@ function Main() {
     <div className={`${styles.App}`}>
       <NavbarComponent userInfo={nickname} />
       <MatchingBtnComponent />
-      <FooterComponent />
     </div>
   );
 }

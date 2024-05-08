@@ -1,63 +1,59 @@
 import React, { useState } from 'react';
-import './signUpForm.css';
+import styles from '../styles/InnerFrame.module.css';
 
-interface SignUpFormData {
-  username: string;
-  password: string;
-  nickname: string;
-  email: string;
+interface InnerFrameProps {
+  onSubmit: (formData: any) => Promise<void>;
 }
 
-interface SignUpFormProps {
-  onSubmit: (formData: SignUpFormData) => void;
-}
-
-const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
+function InnerFrame({ onSubmit }: InnerFrameProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const formData: SignUpFormData = {
-      username,
-      password,
-      nickname,
-      email,
-    };
-    onSubmit(formData);
+  const handleSignUp = async () => {
+    try {
+      await onSubmit({ username, password, nickname, email });
+    } catch (error) {
+      console.error('Error during sign-up:', error);
+    }
   };
 
   return (
-    <form className="signup-form" onSubmit={handleSubmit}>
+    <div className={styles.innerFrame}>
       <input
         type="text"
+        className={styles.usernameInput}
         placeholder="Username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
       <input
         type="password"
+        className={styles.passwordInput}
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
       <input
         type="text"
+        className={styles.nicknameInput}
         placeholder="Nickname"
         value={nickname}
         onChange={(e) => setNickname(e.target.value)}
       />
       <input
         type="email"
+        className={styles.emailInput}
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <button type="submit">Sign Up</button>
-    </form>
+      <button className={styles.signUpButton} onClick={handleSignUp}>
+        Sign Up
+      </button>
+    </div>
   );
-};
+}
 
-export default SignUpForm;
+export default InnerFrame;

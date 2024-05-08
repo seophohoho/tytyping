@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import SignUpContainer from './container/SignUpContainer';
+import SignUpContainer from './src/container/SignUpContainer';
 
 function App() {
   return (

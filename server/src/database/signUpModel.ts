@@ -17,4 +17,16 @@ async function getUserInfoByUsername(username: string) {
   }
 }
 
-export default getUserInfoByUsername;
+async function addUser(username: string, password: string, nickname: string, email: string) {
+  try {
+      const connection = await pool.getConnection();
+      const query = `INSERT INTO userinfo (username, password, nickname, email) VALUES (?, ?, ?, ?)`;
+      await connection.query(query, [username, password, nickname, email]);
+      connection.release();
+  } catch (error) {
+      console.error('Error adding user:', error);
+      throw error;
+  }
+}
+
+export { getUserInfoByUsername, addUser };

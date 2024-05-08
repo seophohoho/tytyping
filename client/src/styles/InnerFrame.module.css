@@ -35,3 +35,16 @@
   .emailInput {
     display: block; /* 블록 요소로 설정 */
   }
+  
+  .signUpButton {
+    width: 120px;
+    height: 42px;
+    font-size: 18px; 
+    text-align: center;
+    position: absolute;
+    left: 930px;
+    top: 622px;
+    border: 2px solid black;
+    background-color: #ffffff;
+    cursor: pointer;
+  }

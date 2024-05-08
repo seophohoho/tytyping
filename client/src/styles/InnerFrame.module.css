@@ -1,0 +1,50 @@
+.innerFrame {
+    width: 544px; /* 너비 544px */
+    height: 207px; /* 높이 207px */
+    background-color: #f0f0f0; /* 배경색을 회색으로 설정 */
+    position: absolute; /* 위치를 절대 위치로 설정 */
+    left: 718px; /* 왼쪽을 X 718에 위치 */
+    top: 398px; /* 상단을 Y 398에 위치 */
+    padding: 10px; /* 안쪽 여백 10px */
+  }
+  
+  .usernameInput,
+  .passwordInput,
+  .nicknameInput,
+  .emailInput {
+    width: 400px; /* 너비 400px */
+    height: 42px; /* 높이 42px */
+    font-size: 18px; /* 글꼴 크기 18px */
+    margin-bottom: 10px; /* 아래 여백 10px */
+  }
+  
+  .usernameInput,
+  .passwordInput,
+  .nicknameInput,
+  .emailInput,
+  .usernameInput::placeholder,
+  .passwordInput::placeholder,
+  .nicknameInput::placeholder,
+  .emailInput::placeholder {
+    text-align: center; /* 텍스트를 가운데 정렬 */
+  }
+  
+  .usernameInput,
+  .passwordInput,
+  .nicknameInput,
+  .emailInput {
+    display: block; /* 블록 요소로 설정 */
+  }
+  
+  .signUpButton {
+    width: 120px;
+    height: 42px;
+    font-size: 18px; 
+    text-align: center;
+    position: absolute;
+    left: 930px;
+    top: 622px;
+    border: 2px solid black;
+    background-color: #ffffff;
+    cursor: pointer;
+  }

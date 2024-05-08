@@ -4,7 +4,6 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   try {
-    console.log(req.body);
     const result = await getUserInfo(req.body);
     res.json(result[0].nickname);
   } catch (error) {

@@ -10,7 +10,6 @@ async function getUserInfo(data: any) {
     const query = `select * from userinfo where username = '${data.username}'`;
     const rows = await connectionDB.execute(query);
     connectionDB.release();
-    console.log(rows);
     return rows;
   } catch (error) {
     console.log(error);

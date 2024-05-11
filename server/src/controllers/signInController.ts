@@ -25,4 +25,4 @@ async function signin(req: Request, res: Response) {
   }
 }
 
-export default signin
+export default signin;

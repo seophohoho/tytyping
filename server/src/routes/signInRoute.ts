@@ -1,8 +1,8 @@
 import express from 'express';
-import signIn from '../controllers/signInController';
+import signinController from '../controllers/signInController';
 
 const router = express.Router();
 
-router.post('/api/sign-in', signIn);
+router.post('/', signinController);
 
 export default router;

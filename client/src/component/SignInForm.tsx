@@ -1,43 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import styles from '../styles/SignUp.module.css';
-import SUpInnerFrame from './SUpInnerFrame';
 import SInCenterFrame from './SInCenterFrame';
+import SInInnerFrame from './SInInnerFrame';
+import { Link } from 'react-router-dom';
+import styles from '../styles/SignUp.module.css';
 
-const SignUpForm: React.FC = () => {
-    const [formData, setFormData] = React.useState({
+interface FormData {
+    username: string;
+    password: string;
+}
+
+const SignInForm: React.FC = () => {
+    const [formData, setFormData] = useState<FormData>({
         username: '',
-        password: '',
-        nickname: '',
-        email: ''
+        password: ''
     });
-
-    const handleChange = (key: string, value: string) => {
-        setFormData(prevState => ({
-            ...prevState,
-            [key]: value
-        }));
-    };
 
     const handleSubmit = async () => {
         try {
-            const response = await axios.post('/api/sign-up', formData);
-            if (response.status === 201) {
-                alert('회원가입이 완료되었습니다.');
-                // 회원가입이 성공한 후 추가적인 작업 수행 가능
-            }
+            await axios.post('http://localhost:8000/api/sign-in', formData); // 수정: URL 경로 변경
+            alert('로그인이 완료되었습니다.');
         } catch (error) {
-            console.error('Error during sign-up:', error);
-            alert('회원가입에 실패했습니다.');
+            console.error('Error during sign-in:', error);
+            alert('로그인에 실패했습니다.');
         }
     };
 
     return (
         <div className={styles.App}>
-            <SInCenterFrame to="/signin" />
-            <SUpInnerFrame formData={formData} onChange={handleChange} onSubmit={handleSubmit} />
+            <SInCenterFrame to="/signup" />
+            <SInInnerFrame
+                formData={formData}
+                onChange={(key, value) => setFormData({ ...formData, [key]: value })}
+                onSubmit={handleSubmit}
+            />
         </div>
     );
 }
 
-export default SignUpForm;
+export default SignInForm;

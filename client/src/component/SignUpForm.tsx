@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // useNavigate 훅 import
 import styles from '../styles/SignUp.module.css';
 import SUpInnerFrame from './SUpInnerFrame';
 import SInCenterFrame from './SUpCenterFrame';
@@ -11,6 +12,7 @@ const SignUpForm: React.FC = () => {
         nickname: '',
         email: ''
     });
+    const navigate = useNavigate(); // useNavigate 훅 사용
 
     const handleChange = (key: string, value: string) => {
         setFormData(prevState => ({
@@ -24,7 +26,7 @@ const SignUpForm: React.FC = () => {
             const response = await axios.post('http://localhost:8000/api/sign-up', formData);
             if (response.status === 201) {
                 alert('회원가입이 완료되었습니다.');
-                // 회원가입이 성공한 후 추가적인 작업 수행 가능
+                navigate('/signin');
             }
         } catch (error) {
             console.error('Error during sign-up:', error);

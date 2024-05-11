@@ -2,7 +2,12 @@ import React from 'react';
 import styles from '../styles/InnerFrame.module.css';
 
 interface InnerFrameProps {
-  formData: any;
+  formData: {
+    username: string;
+    password: string;
+    nickname: string;
+    email: string;
+  };
   onChange: (key: string, value: string) => void;
   onSubmit: () => void;
 }

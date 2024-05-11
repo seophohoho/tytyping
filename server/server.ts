@@ -10,8 +10,8 @@ const PORT = 8000;
 app.use(express.json());
 app.use(cors());
 app.use('/userinfo', userInfoRoute);
-app.use('/signin', signInRoute);
-app.use('/signup', signUpRoute);
+app.use('/api/sign-up', signUpRoute);
+app.use('/api/sign-in', signInRoute);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

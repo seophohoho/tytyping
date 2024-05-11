@@ -1,8 +1,8 @@
 import express from 'express';
-import signup from '../controllers/signUpController';
+import signupController from '../controllers/signUpController';
 
 const router = express.Router();
 
-router.post('/api/sign-up', signup);
+router.post('/', signupController); // POST 요청을 signupController로 라우팅
 
 export default router;

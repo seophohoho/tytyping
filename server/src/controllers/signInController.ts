@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { getUserInfoByUsername } from '../database/signInModel';
+import bcrypt from 'bcryptjs';
 
 async function signin(req: Request, res: Response) {
   const { username, password } = req.body;
@@ -13,7 +14,9 @@ async function signin(req: Request, res: Response) {
     }
     
     // 패스워드 확인
-    if (userInfo[0].password !== password) {
+    const hashedPassword = userInfo[0].password;
+    const passwordMatch = await bcrypt.compare(password, hashedPassword);
+    if (!passwordMatch) { 
       return res.status(401).json({ message: '패스워드가 올바르지 않습니다.' });
     }
 

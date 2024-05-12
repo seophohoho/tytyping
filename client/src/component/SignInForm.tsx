@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // useNavigate 훅 import
+import axios, { AxiosError } from 'axios';
+import { useNavigate } from 'react-router-dom';
 import SInCenterFrame from './SInCenterFrame';
 import SInInnerFrame from './SInInnerFrame';
 import styles from '../styles/SignUp.module.css';
@@ -15,16 +15,32 @@ const SignInForm: React.FC = () => {
         username: '',
         password: ''
     });
-    const navigate = useNavigate(); // useNavigate 훅 사용
+    const navigate = useNavigate();
 
     const handleSubmit = async () => {
         try {
-            await axios.post('http://localhost:8000/api/sign-in', formData);
+            if (!formData.username) {
+                alert('아이디를 입력해야 합니다.');
+                return;
+            }
+            if (!formData.password) {
+                alert('비밀번호를 입력해야 합니다.');
+                return;
+            }
+            
+            const response = await axios.post('http://localhost:8000/api/sign-in', formData);
             alert('로그인이 완료되었습니다.');
-            navigate('/main'); // 로그인 성공 시 메인 페이지로 이동
+            navigate('/main');
         } catch (error) {
             console.error('Error during sign-in:', error);
-            alert('로그인에 실패했습니다.');
+            const axiosError = error as AxiosError;
+            if (axiosError.response && axiosError.response.status === 404) {
+                alert('해당하는 사용자를 찾을 수 없습니다.');
+            } else if (axiosError.response && axiosError.response.status === 401) {
+                alert('비밀번호가 올바르지 않습니다.');
+            } else {
+                alert('로그인에 실패했습니다.');
+            }
         }
     };
 

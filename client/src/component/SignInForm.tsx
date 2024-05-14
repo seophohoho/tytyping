@@ -3,7 +3,7 @@ import axios, { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import SInCenterFrame from './SInCenterFrame';
 import SInInnerFrame from './SInInnerFrame';
-import styles from '../styles/SignUp.module.css';
+import styles from '../styles/OutFrame.module.css';
 
 interface FormData {
     username: string;

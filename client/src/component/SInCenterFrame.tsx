@@ -13,9 +13,9 @@ const SInCenterFrame: React.FC<CenterFrameProps> = ({ to }) => {
       <div className={styles.blackLine}></div>
       <Link to={to} className={styles.nonlineButton}>Sign Up</Link>
       <div className={styles.bottomLinks}>
-        <Link to="/forgot-username" className={styles.nonlineFindButton1}>Forgot Your Username?</Link>
+        <Link to="/find-username" className={styles.nonlineFindButton1}>Forgot Your Username?</Link>
         <span className={styles.separator}>|</span>
-        <Link to="/forgot-password" className={styles.nonlineFindButton2}>Forgot Your Password?</Link>
+        <Link to="/find-password" className={styles.nonlineFindButton2}>Forgot Your Password?</Link>
       </div>
     </div>
   );

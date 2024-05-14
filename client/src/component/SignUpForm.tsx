@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import styles from '../styles/SignUp.module.css';
+import styles from '../styles/OutFrame.module.css';
 import SUpInnerFrame from './SUpInnerFrame';
 import SInCenterFrame from './SUpCenterFrame';
 

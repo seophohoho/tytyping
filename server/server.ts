@@ -1,8 +1,9 @@
 import express from "express";
 import cors from "cors";
 import userInfoRoute from "./src/routes/userInfoRoute";
-import socketio from "socket.io";
+import socketio, { Socket } from "socket.io";
 import { createServer } from "http";
+import { Queue } from 'queue-typescript';
 
 const app = express();
 const PORT = 8000;
@@ -14,7 +15,10 @@ const ioServer = new socketio.Server(server,{
     methods:["GET","POST"]
   }
 });
-const gameSocket = ioServer.of('/game');
+
+const rootRoom = ioServer.of('/');
+const readyRoom = ioServer.of('/ready-room');
+const gameRoom = ioServer.of('/game-room');
 
 app.use(express.json());
 app.use(cors({
@@ -29,11 +33,44 @@ app.get("/", (req, res) => {
 
 server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+  setInterval(() => {
+    if(matchingUsers.length % 2 === 0 && matchingUsers.length !== 0){
+      const targetA = matchingUsers.dequeue();
+      const targetB = matchingUsers.dequeue();
+      if (targetA && targetB) {
+        rootRoom.to(targetA.socketId).emit('match-success', targetB);
+        rootRoom.to(targetB.socketId).emit('match-success', targetA);
+      }
+    }
+  }, 2000); // 5000 milliseconds = 5 seconds
 });
 
-gameSocket.on('connection',(socket)=>{
-  console.log(socket.id);
+interface Data {
+  nickname: string;
+  socketId: string;
+}
+
+const allUsers: Record<string, Data> = {};
+const matchingUsers: Queue<Data>= new Queue<Data>();
+
+rootRoom.on('connection',(socket)=>{
+  socket.on('connect-main',(data:Data)=>{
+    allUsers[socket.id]={
+      nickname:data.nickname,
+      socketId:socket.id
+    }
+  });
+
   socket.on('disconnect',()=>{
-    console.log('disconnect '+socket.id);
-  })
+    delete allUsers[socket.id];
+  });
+  
+  socket.on('start-matching',(data)=>{
+    matchingUsers.enqueue({socketId:data.socketId,nickname:data.nickname});
+  });
+
+  socket.on('cancel-matching',(data)=>{
+    
+  });
 });
+

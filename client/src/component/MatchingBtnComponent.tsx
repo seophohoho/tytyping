@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import styles from '../styles/MatchingBtn.module.css';
 
-function MatchingBtnComponent() {
+function MatchingBtnComponent(props:any) {
+  const {socketInfo,userInfo} = props;
   const [btnClick,setBtnClick] = useState(false);
 
   const matchingBtnListner = () =>{
     setBtnClick(true);
+    socketInfo.emit('start-matching',{nickname:userInfo,socketId:socketInfo.id});
   }
 
   const cancelBtnListner = () =>{
-    setBtnClick(false)
+    setBtnClick(false);
+    socketInfo.emit('cancel-matching',{nickname:userInfo,socketId:socketInfo.id});
   }
 
   return (

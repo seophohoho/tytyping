@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styles from '../../styles/MatchingBtn.module.css';
+import styles from '../../styles/MatchingReady.module.css';
 
 interface PageState {
   state: string;

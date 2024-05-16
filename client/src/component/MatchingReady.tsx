@@ -7,6 +7,7 @@ import { serverUrl } from '../config/serverUrl';
 import styles from '../styles/Main.module.css';
 import loading from '../styles/Loading.module.css';
 import MatchingBtnComponent from './commonComponent/MatchingBtnComponent';
+import MatchingUserComponent from './commonComponent/MatchingUserComponent';
 
 function MatchingReady() {
   const [nickname, setNickname] = useState('');
@@ -26,13 +27,17 @@ function MatchingReady() {
     <div className={`${styles.App}`}>
       <NavbarComponent userInfo={nickname} />
       <div className={`${styles.mainBody}`}>
-        <div className={loading.foldingCube}>
-          <div className={`${loading.cube} ${loading.cube1}`} />
-          <div className={`${loading.cube} ${loading.cube2}`} />
-          <div className={`${loading.cube} ${loading.cube4}`} />
-          <div className={`${loading.cube} ${loading.cube3}`} />
+        <MatchingUserComponent />
+        <div className={`${styles.mainBody__center}`}>
+          {/* <div className={loading.foldingCube}>
+            <div className={`${loading.cube} ${loading.cube1}`} />
+            <div className={`${loading.cube} ${loading.cube2}`} />
+            <div className={`${loading.cube} ${loading.cube4}`} />
+            <div className={`${loading.cube} ${loading.cube3}`} />
+          </div> */}
+          <MatchingBtnComponent pageState={buttonState} />
         </div>
-        <MatchingBtnComponent pageState={buttonState} />
+        <MatchingUserComponent />
       </div>
       <FooterComponent />
     </div>

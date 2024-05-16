@@ -22,5 +22,4 @@ function MatchingBtnComponent({ pageState }: { pageState: PageState }) {
     </Link>
   );
 }
-
 export default MatchingBtnComponent;

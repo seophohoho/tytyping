@@ -11,6 +11,7 @@ import MatchingUserComponent from './commonComponent/MatchingUserComponent';
 
 function MatchingReady() {
   const [nickname, setNickname] = useState('');
+  const [matchState, setMatchState] = useState(false);
   const buttonState = { state: 'CANCEL' };
 
   useEffect(() => {
@@ -22,22 +23,30 @@ function MatchingReady() {
         setNickname(res.data);
       }
     });
+
+    //매칭 상태 관리
+    if (matchState === true) {
+      setMatchState(true);
+      //axios를 통해 값을 받아서 setMatchState의 값을 true로 변경.
+    }
   });
   return (
     <div className={`${styles.App}`}>
       <NavbarComponent userInfo={nickname} />
       <div className={`${styles.mainBody}`}>
-        <MatchingUserComponent />
+        {matchState && <MatchingUserComponent />}
         <div className={`${styles.mainBody__center}`}>
-          {/* <div className={loading.foldingCube}>
-            <div className={`${loading.cube} ${loading.cube1}`} />
-            <div className={`${loading.cube} ${loading.cube2}`} />
-            <div className={`${loading.cube} ${loading.cube4}`} />
-            <div className={`${loading.cube} ${loading.cube3}`} />
-          </div> */}
+          {!matchState && (
+            <div className={loading.foldingCube}>
+              <div className={`${loading.cube} ${loading.cube1}`} />
+              <div className={`${loading.cube} ${loading.cube2}`} />
+              <div className={`${loading.cube} ${loading.cube4}`} />
+              <div className={`${loading.cube} ${loading.cube3}`} />
+            </div>
+          )}
           <MatchingBtnComponent pageState={buttonState} />
         </div>
-        <MatchingUserComponent />
+        {matchState && <MatchingUserComponent />}
       </div>
       <FooterComponent />
     </div>

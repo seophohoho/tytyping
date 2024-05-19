@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import NavbarComponent from './NavbarComponent';
-import FooterComponent from './FooterComponent';
 import { serverUrl } from '../config/serverUrl';
 import styles from '../styles/Main.module.css';
 import loading from '../styles/Loading.module.css';
@@ -24,10 +23,10 @@ function MatchingReady() {
       }
     });
 
-    //매칭 상태 관리
+    // 매칭 상태 관리
     if (matchState === true) {
       setMatchState(true);
-      //axios를 통해 값을 받아서 setMatchState의 값을 true로 변경.
+      // axios를 통해 값을 받아서 setMatchState의 값을 true로 변경.
     }
   });
   return (
@@ -48,7 +47,6 @@ function MatchingReady() {
         </div>
         {matchState && <MatchingUserComponent />}
       </div>
-      <FooterComponent />
     </div>
   );
 }

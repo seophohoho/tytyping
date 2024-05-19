@@ -10,7 +10,7 @@ import MatchingUserComponent from './commonComponent/MatchingUserComponent';
 
 function MatchingReady() {
   const [nickname, setNickname] = useState('');
-  const [matchState, setMatchState] = useState(false);
+  const [matchState, setMatchState] = useState(true);
   const buttonState = { state: 'CANCEL' };
 
   useEffect(() => {

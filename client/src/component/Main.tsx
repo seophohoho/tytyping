@@ -54,9 +54,8 @@ function Main() {
     <div className={`${styles.App}`}>
       <NavbarComponent userInfo={nickname} />
       <div className={`${styles.mainBody}`}>
-        <MatchingBtnComponent pageState={buttonState} />
+        <MatchingBtnComponent pageState={buttonState} socketInfo={socketInfo} userInfo={nickname} />
       </div>
-      {/* <MatchingBtnComponent socketInfo={socketInfo} userInfo={nickname} /> */}
     </div>
   );
 }

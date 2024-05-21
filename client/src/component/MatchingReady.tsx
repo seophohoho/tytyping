@@ -10,18 +10,16 @@ import MatchingUserComponent from './commonComponent/MatchingUserComponent';
 
 function MatchingReady() {
   const [nickname, setNickname] = useState('');
-  const [matchState, setMatchState] = useState(true);
+  const [matchState, setMatchState] = useState(false); //default true.
   const buttonState = { state: 'CANCEL' };
 
   useEffect(() => {
-    setNickname('test');
-    console.log(nickname);
-    axios.post(`${serverUrl}/userInfo`, { username: 'testman' }).then((res) => {
-      if (res.status === 200) {
-        console.log(res.data);
-        setNickname(res.data);
-      }
-    });
+    // axios.post(`${serverUrl}/userInfo`, { username: 'testman' }).then((res) => {
+    //   if (res.status === 200) {
+    //     console.log(res.data);
+    //     setNickname(res.data);
+    //   }
+    // });
 
     // 매칭 상태 관리
     if (matchState === true) {

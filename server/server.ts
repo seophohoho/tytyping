@@ -35,8 +35,11 @@ server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
   setInterval(() => {
     if(matchingUsers.length % 2 === 0 && matchingUsers.length !== 0){
+      
       const targetA = matchingUsers.dequeue();
       const targetB = matchingUsers.dequeue();
+      console.log(targetA);
+      console.log(targetB);
       if (targetA && targetB) {
         rootRoom.to(targetA.socketId).emit('match-success', targetB);
         rootRoom.to(targetB.socketId).emit('match-success', targetA);

@@ -5,6 +5,7 @@ import NavbarComponent from './NavbarComponent';
 import MatchingBtnComponent from './commonComponent/MatchingBtnComponent';
 import styles from '../styles/Main.module.css';
 import { serverUrl } from '../config/serverUrl';
+import MatchingReady from './MatchingReady';
 
 function Main() {
   const [nickname, setNickname] = useState('');

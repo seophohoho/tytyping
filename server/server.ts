@@ -35,9 +35,8 @@ server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
   setInterval(() => {
     if(matchingUsers.length % 2 === 0 && matchingUsers.length !== 0){
-      
-      const targetA = matchingUsers.dequeue();
-      const targetB = matchingUsers.dequeue();
+      const targetA = matchingUsers.shift() as Data | undefined;
+      const targetB = matchingUsers.shift() as Data | undefined;
       console.log(targetA);
       console.log(targetB);
       if (targetA && targetB) {
@@ -45,7 +44,7 @@ server.listen(PORT, () => {
         rootRoom.to(targetB.socketId).emit('match-success', targetA);
       }
     }
-  }, 2000); // 5000 milliseconds = 5 seconds
+  }, 2000);
 });
 
 interface Data {
@@ -54,7 +53,8 @@ interface Data {
 }
 
 const allUsers: Record<string, Data> = {};
-const matchingUsers: Queue<Data>= new Queue<Data>();
+const matchingUsers:Array<Record<string,Data>> = [];
+// const matchingUsers: Queue<Data>= new Queue<Data>();
 
 rootRoom.on('connection',(socket)=>{
   socket.on('connect-main',(data:Data)=>{
@@ -69,11 +69,13 @@ rootRoom.on('connection',(socket)=>{
   });
   
   socket.on('start-matching',(data)=>{
-    matchingUsers.enqueue({socketId:data.socketId,nickname:data.nickname});
+    matchingUsers.push({socketId:data.socketId,nickname:data.nickname});
   });
 
   socket.on('cancel-matching',(data)=>{
-    
+    const index = matchingUsers.findIndex(user=>user.socketId === data.socketId);
+    if(index !== -1){
+      matchingUsers.splice(index,1);
+    }
   });
 });
-

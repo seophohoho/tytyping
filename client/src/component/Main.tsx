@@ -1,61 +1,69 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useInsertionEffect, useState } from 'react';
 import axios from 'axios';
 import { Socket, io } from 'socket.io-client';
 import NavbarComponent from './NavbarComponent';
-import MatchingBtnComponent from './commonComponent/MatchingBtnComponent';
 import styles from '../styles/Main.module.css';
 import { serverUrl } from '../config/serverUrl';
-import MatchingReady from './MatchingReady';
+import { GameState } from '../constant/GameState';
+import MatchingComponent from './commonComponent/MatchingComponent';
+import NoneMatchingComponent from './commonComponent/NoneMatchingComponent';
+import TestComponent from './commonComponent/TestComponent';
 
 function Main() {
-  const [nickname, setNickname] = useState('');
-  const buttonState = { state: 'MATCHING' };
-  const [isNicknameSet, setIsNicknameSet] = useState(false);
-  const [isConnected, setIsConnected] = useState(false);
   const [socketInfo, setSocketInfo] = useState<Socket | null>(null);
+  const [userInfo, setUserInfo] = useState({nickname:""});
+  const [isUserInfoSet, setIsUserInfo] = useState(false);
+  const [gameState,setGameState] = useState(GameState.NONE);
 
   useEffect(() => {
     axios.post(`${serverUrl}/userinfo`, { username: 'test' }).then((res) => {
       if (res.status === 200) {
-        setNickname(res.data);
-        setIsNicknameSet(true);
+        setUserInfo({nickname:res.data});
+        setIsUserInfo(true);
       }
     });
   }, []);
 
   useEffect(() => {
-    if (!isNicknameSet) return;
+    if (!isUserInfoSet) return;
     const rootSocket = io(`${serverUrl}/`);
-    console.log('socket 연결!!!!!!!!!!!!!!!!!!!');
-    function onConnect() {
-      setIsConnected(true);
+    console.log('socket 연결 성공.');
+
+    rootSocket.on('connect', ()=>{
       if (rootSocket) {
         setSocketInfo(rootSocket);
-        rootSocket.emit('connect-main', { socketId: rootSocket.id, nickname });
+        rootSocket.emit('connect-main', { socketId: rootSocket.id, userInfo:userInfo });
       }
-    }
+    });
 
-    function onDisconnect() {
-      setIsConnected(false);
-    }
+    rootSocket.on('disconnect',()=>{
 
-    rootSocket.on('connect', onConnect);
-    rootSocket.on('disconnect', onDisconnect);
-    rootSocket.on('match-success', (data) => {
-      console.log(data);
     });
 
     return () => {
-      rootSocket.off('connect', onConnect);
-      rootSocket.off('disconnect', onDisconnect);
+      rootSocket.off('connect');
+      rootSocket.off('disconnect');
     };
-  }, [isNicknameSet]);
+  }, [isUserInfoSet]);
+
+  const renderComponent = () =>{
+    switch(gameState){
+      case GameState.NONE:
+        return <NoneMatchingComponent setGameState={setGameState} socketInfo={socketInfo} userInfo={userInfo}/>;
+      case GameState.MATCHING:
+        return <MatchingComponent setGameState={setGameState} socketInfo={socketInfo} userInfo={userInfo}/>;
+      case GameState.MATCHING_READY:
+        return <TestComponent/>
+
+
+    }
+  }
 
   return (
     <div className={`${styles.App}`}>
-      <NavbarComponent userInfo={nickname} />
+      <NavbarComponent userInfo={userInfo.nickname} />
       <div className={`${styles.mainBody}`}>
-        <MatchingBtnComponent pageState={buttonState} socketInfo={socketInfo} userInfo={nickname} />
+        {renderComponent()}
       </div>
     </div>
   );

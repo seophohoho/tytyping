@@ -3,13 +3,17 @@ import styles from '../../styles/MatchingReady.module.css';
 import { GameState } from '../../constant/GameState';
 
 function NoneMatchingComponent(props: any) {
-  const { setGameState, socketInfo, userInfo} = props; //<--check
+  const { setGameState, socketInfo, userInfo, setTargetUserInfo} = props; //<--check
   const [btnClick, setBtnClick] = useState(false);
 
   const matchingBtnListner = () => {
     setGameState(GameState.MATCHING);
     socketInfo.emit('start-matching',{ nickname: userInfo.nickname, socketId: socketInfo.id });
-    socketInfo.on('match-success',()=>{ setGameState(GameState.MATCHING_READY); });
+    socketInfo.on('match-success',(data:any)=>{ 
+      console.log(data);
+      setTargetUserInfo(data.nickname);
+      setGameState(GameState.MATCHING_READY); 
+    });
   }
 
   return (

@@ -14,6 +14,7 @@ function Main() {
   const [userInfo, setUserInfo] = useState({nickname:""});
   const [isUserInfoSet, setIsUserInfo] = useState(false);
   const [gameState,setGameState] = useState(GameState.NONE);
+  const [targetUserInfo,setTargetUserInfo] = useState({nickname:""});
 
   useEffect(() => {
     axios.post(`${serverUrl}/userinfo`, { username: 'test' }).then((res) => {
@@ -49,13 +50,11 @@ function Main() {
   const renderComponent = () =>{
     switch(gameState){
       case GameState.NONE:
-        return <NoneMatchingComponent setGameState={setGameState} socketInfo={socketInfo} userInfo={userInfo}/>;
+        return <NoneMatchingComponent setGameState={setGameState} socketInfo={socketInfo} userInfo={userInfo} setTargetUserInfo={setTargetUserInfo}/>;
       case GameState.MATCHING:
         return <MatchingComponent setGameState={setGameState} socketInfo={socketInfo} userInfo={userInfo}/>;
       case GameState.MATCHING_READY:
-        return <TestComponent/>
-
-
+        return <TestComponent setGameState={setGameState} targetUserInfo={targetUserInfo}/>
     }
   }
 

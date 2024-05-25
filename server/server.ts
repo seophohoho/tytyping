@@ -13,7 +13,7 @@ app.use(cors());
 app.use('/userinfo', userInfoRoute);
 app.use('/api/sign-up', signUpRoute);
 app.use('/api/sign-in', signInRoute);
-app.use('/api/find-username', findUsernameRoute);
+app.use('/api', findUsernameRoute);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

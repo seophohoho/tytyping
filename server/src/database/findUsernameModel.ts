@@ -5,9 +5,12 @@ import { DBconnection } from './config'; // DB 연결 정보 가져오기
 // SMTP 설정
 const transporter = nodemailer.createTransport({
     service: 'gmail',
+    host: 'smtp.gmail.com', // host를 gmail로 설정
+    port: 587,
+    secure: false,
     auth: {
-        user: 'your.email@gmail.com', // 보내는 이메일 주소
-        pass: 'yourPassword' // 이메일 비밀번호
+        user: 'gmltn1052@gmail.com', // 보내는 이메일 주소
+        pass: 'xjxs pafx ryzw pslw' // 이메일 비밀번호
     }
 });
 
@@ -21,7 +24,7 @@ export async function sendUsernameByEmail(email: string) {
         conn = await pool.getConnection();
 
         // 이메일로 사용자 찾기
-        const rows = await conn.query(`SELECT username FROM users WHERE email = ?`, [email]);
+        const rows = await conn.query(`SELECT username FROM account WHERE email = ?`, [email]);
 
         if (rows.length === 0) {
             throw new Error('해당 이메일로 등록된 사용자가 없습니다.');
@@ -31,7 +34,7 @@ export async function sendUsernameByEmail(email: string) {
 
         // 이메일 내용 설정
         const mailOptions = {
-            from: 'your.email@gmail.com', // 보내는 이메일 주소
+            from: 'gmltn1052@gmail.com', // 보내는 이메일 주소
             to: email, // 받는 이메일 주소
             subject: '아이디 찾기 안내', // 이메일 제목
             text: `귀하의 아이디는 ${username}입니다.` // 아이디 정보

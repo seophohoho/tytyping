@@ -7,7 +7,7 @@ const FUCenterFrame: React.FC = () => {
         <div className={styles.centerFrame}>
             <p className={styles.topText}>Forgot your username?</p>
             <div className={styles.blackLine}></div>
-            <p className={styles.explainText}>Please enter your nickname && password</p>
+            <p className={styles.explainText}>Please enter your email</p>
             <Link to="/signin" className={styles.nonlineButton}>Sign In</Link>
         </div>
     );

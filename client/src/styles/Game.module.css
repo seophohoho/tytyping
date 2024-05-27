@@ -1,0 +1,38 @@
+.gameContainer {
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gameInputContainer {
+  margin-top: 8.242%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.gameInputUser {
+  display: flex;
+}
+
+.bigBox {
+  width: 400px;
+  margin-top: 32px;
+}
+
+.inputContainer {
+  width: 800px;
+  height: 200px;
+  padding: 16px 28px;
+}
+
+.inputWordBox {
+  width: 100%;
+  height: 34px;
+
+  font-size: 16px;
+  background-color: #eeeeee;
+  border: 0px;
+  outline: none;
+}

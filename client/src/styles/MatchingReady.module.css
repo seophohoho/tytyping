@@ -1,0 +1,51 @@
+.matchingBtn {
+  font-family: 'Courier Prime', Courier, monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 51px;
+  width: 193px;
+  font-size: 24px;
+  border: 2px solid black;
+  box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.matchingBtn .matchingReady {
+  margin-top: 43%;
+}
+
+.matchingUser__container {
+  width: 20.833%;
+  height: 58.826%;
+  background: #d9d9d9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.matchingUser__userName {
+  font-family: 'Courier Prime', Courier, monospace;
+  margin-top: 17.6%;
+  font-size: 24px;
+}
+
+.matchingUser__userScore {
+  font-family: 'Courier Prime', Courier, monospace;
+  margin-top: 12px;
+  font-size: 18px;
+}
+.mainBody__center {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 5.756%;
+}
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: 100%;
+}

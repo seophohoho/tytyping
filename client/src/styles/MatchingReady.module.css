@@ -34,3 +34,18 @@
   margin-top: 12px;
   font-size: 18px;
 }
+.mainBody__center {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 5.756%;
+}
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: 100%;
+}

@@ -8,7 +8,7 @@ function MatchingBtnComponent(props: any) {
 
   const matchingBtnListner = () => {
     setGameState(GameState.MATCHING);
-  }
+  };
 
   return (
     <div>

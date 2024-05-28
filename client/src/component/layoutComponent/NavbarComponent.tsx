@@ -1,10 +1,9 @@
-import styles from '../styles/Navbar.module.css';
+import styles from '../../styles/Navbar.module.css';
 
 function NavbarComponent(props: any) {
   const { userInfo } = props;
   return (
     <div className={`${styles.navbar}`}>
-      {/* logo */}
       <a href="#home" className={`${styles.navMenu} ${styles.logo}`}>
         TyTyping
       </a>

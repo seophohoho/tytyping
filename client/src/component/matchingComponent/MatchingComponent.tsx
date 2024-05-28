@@ -24,7 +24,7 @@ const MatchingComponent: React.FC<MatchingComponentProps> = (props) => {
 
   return (
     <div className={`${styles.App}`}>
-      <div className={`${styles.mainBody__center}`}>
+      <div className={`${styles.mainBody__matching}`}>
         <div className={`${loading.foldingCube}`}>
           <div className={`${loading.cube} ${loading.cube1}`} />
           <div className={`${loading.cube} ${loading.cube2}`} />

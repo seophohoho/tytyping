@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+
 import { Socket, io } from 'socket.io-client';
-import NavbarComponent from './NavbarComponent';
-import styles from '../styles/Main.module.css';
 import { serverUrl } from '../config/serverUrl';
 import { GameState } from '../constant/GameState';
-import MatchingComponent from './commonComponent/MatchingComponent';
+import NavbarComponent from './layoutComponent/NavbarComponent';
+import MatchingComponent from './matchingComponent/MatchingComponent';
 import NoneMatchingComponent from './commonComponent/NoneMatchingComponent';
-import TestComponent from './commonComponent/TestComponent';
+
+import MatchingReadyComponent from './matchingComponent/MatchingReadyComponent';
+import styles from '../styles/Main.module.css';
 
 function Main() {
   const [socketInfo, setSocketInfo] = useState<Socket | null>(null);
@@ -16,10 +18,12 @@ function Main() {
   const [gameState, setGameState] = useState(GameState.NONE);
   const [targetUserInfo, setTargetUserInfo] = useState({ nickname: '' });
 
+  // 컴포넌트 mount 시 동작
   useEffect(() => {
+    // user정보 업데이트 함수
     const fetchUserInfo = async () => {
       try {
-        const res = await axios.post(`${serverUrl}/userinfo`, { username: 'test' });
+        const res = await axios.post(`${serverUrl}/userinfo`, { username: 'test' }); // 차후 수정 필요. 닉네임 test인 유저 검색.
         if (res.status === 200) {
           setUserInfo({ nickname: res.data });
           setIsUserInfoSet(true);
@@ -32,6 +36,7 @@ function Main() {
     fetchUserInfo();
   }, []);
 
+  // User정보가 수정되면 동작
   useEffect(() => {
     if (!isUserInfoSet) return () => {};
 
@@ -70,7 +75,14 @@ function Main() {
       case GameState.MATCHING:
         return <MatchingComponent setGameState={setGameState} socketInfo={socketInfo} userInfo={userInfo} />;
       case GameState.MATCHING_READY:
-        return <TestComponent setGameState={setGameState} targetUserInfo={targetUserInfo} />;
+        return (
+          <MatchingReadyComponent
+            setGameState={setGameState}
+            socketInfo={socketInfo}
+            userInfo={userInfo}
+            targetUserInfo={targetUserInfo}
+          />
+        );
       default:
         return null;
     }

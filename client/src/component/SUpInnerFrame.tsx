@@ -62,6 +62,6 @@ const SUpInnerFrame: React.FC<InnerFrameProps> = ({ formData, onChange, onSubmit
       </button>
     </div>
   );
-}
+};
 
 export default SUpInnerFrame;

@@ -37,6 +37,6 @@ const SInInnerFrame: React.FC<InnerFrameProps> = ({ formData, onChange, onSubmit
       </button>
     </div>
   );
-}
+};
 
 export default SInInnerFrame;

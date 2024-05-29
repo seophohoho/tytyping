@@ -10,8 +10,7 @@ function NoneMatchingComponent(props: any) {
     setGameState(GameState.MATCHING);
     socketInfo.emit('start-matching', { nickname: userInfo.nickname, socketId: socketInfo.id });
     socketInfo.on('match-success', (data: any) => {
-      console.log(data);
-      setTargetUserInfo(data.nickname);
+      setTargetUserInfo({ socketId: data.socketId, nickname: data.nickname });
       setGameState(GameState.MATCHING_READY);
     });
   };

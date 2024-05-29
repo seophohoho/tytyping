@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import styles from '../../styles/MatchingReady.module.css';
 import { GameState } from '../../constant/GameState';
 import MatchedUserBox from '../commonComponent/MatchedUserBox';
+import { traceDeprecation } from 'process';
+import MatchedTargetUserBox from '../commonComponent/MatchedTargetUserBox';
 
 function MatchingReadyComponent(props: any) {
   const { setGameState, socketInfo, userInfo, targetUserInfo } = props; //<--check
@@ -9,8 +11,8 @@ function MatchingReadyComponent(props: any) {
 
   const btnListner = () => {
     if (socketInfo) {
-      socketInfo.emit('cancel-matching', { nickname: userInfo.nickname, socketId: socketInfo.id });
       setGameState(GameState.NONE);
+      socketInfo.emit('cancel-matching-ready', { user: targetUserInfo });
     }
   };
 
@@ -22,17 +24,20 @@ function MatchingReadyComponent(props: any) {
   useEffect(() => {
     console.log('TestComponent!!');
     console.log(targetUserInfo); //상대방의 데이터가 잘 들어왔음을 확인함.
+    socketInfo.on('matching-ready-quiet', () => {
+      alert('상대방이 나감.');
+      setGameState(GameState.NONE);
+    });
   }, []);
 
-  console.log('소켓:', props.targetUserInfo.nickname);
   return (
     <div className={`${styles.App}`}>
       <div className={`${styles.mainBody__matchingReady}`}>
-        <MatchedUserBox player={props.userInfo.nickname} />
+        <MatchedUserBox userInfo={userInfo} targetUserInfo={targetUserInfo} socketInfo={socketInfo} />
         <button type="button" className={`${styles.matchingBtn}`} onClick={btnListner}>
           EXIT
         </button>
-        <MatchedUserBox player={props.targetUserInfo.nickname} />
+        <MatchedTargetUserBox userInfo={targetUserInfo} socketInfo={socketInfo} />
       </div>
     </div>
   );

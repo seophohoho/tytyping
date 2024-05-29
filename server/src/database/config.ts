@@ -1,7 +1,7 @@
 export const DBconnection = () => ({
   host: "localhost",
   user: "root",
-  port: 3307,
-  password: "Cheaper12",
+  port: 3306,
+  password: "seopho",
   database: "tytyping",
 });

@@ -74,7 +74,18 @@ rootRoom.on("connection", (socket) => {
     };
   });
 
-  socket.on("disconnect", () => {
+  socket.on("disconnect", (data: any) => {
+    //delete targetUser in matchingUsers.
+    const index = matchingUsers.findIndex(
+      (user) => user.socketId === data.user.socketId
+    );
+    if (index !== -1) {
+      matchingUsers.splice(index, 1);
+    }
+
+    //delete targetUser in battlingUsers;
+    //<--나중에 추가하자.
+
     delete allUsers[socket.id];
   });
 
@@ -89,5 +100,19 @@ rootRoom.on("connection", (socket) => {
     if (index !== -1) {
       matchingUsers.splice(index, 1);
     }
+  });
+
+  socket.on("cancel-matching-ready", (data) => {
+    rootRoom.to(data.user.socketId).emit("matching-ready-quiet", true);
+    const index = matchingUsers.findIndex(
+      (user) => user.socketId === data.user.socketId
+    );
+    if (index !== -1) {
+      matchingUsers.splice(index, 1);
+    }
+  });
+
+  socket.on("matching-ready", (data: any) => {
+    rootRoom.to(data.user.socketId).emit("matching-ready-state", data.state);
   });
 });

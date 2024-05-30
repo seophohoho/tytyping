@@ -1,8 +1,8 @@
 import React from 'react';
+import { Socket } from 'socket.io-client';
 import styles from '../../styles/MatchingReady.module.css';
 import loading from '../../styles/Loading.module.css';
 import { GameState } from '../../constant/GameState';
-import { Socket } from 'socket.io-client';
 
 interface MatchingComponentProps {
   setGameState: (state: GameState) => void;

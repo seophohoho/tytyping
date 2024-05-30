@@ -5,11 +5,12 @@ import { Socket, io } from 'socket.io-client';
 import { serverUrl } from '../config/serverUrl';
 import { GameState } from '../constant/GameState';
 import NavbarComponent from './layoutComponent/NavbarComponent';
-import MatchingComponent from './matchingComponent/MatchingComponent';
-import NoneMatchingComponent from './commonComponent/NoneMatchingComponent';
+import MatchingComponent from './page/MatchingComponent';
+import NoneMatchingComponent from './page/NoneMatchingComponent';
 
-import MatchingReadyComponent from './matchingComponent/MatchingReadyComponent';
+import MatchingReadyComponent from './page/MatchingReadyComponent';
 import styles from '../styles/Main.module.css';
+import Game from './Game';
 
 function Main() {
   const [socketInfo, setSocketInfo] = useState<Socket | null>(null);
@@ -77,6 +78,15 @@ function Main() {
       case GameState.MATCHING_READY:
         return (
           <MatchingReadyComponent
+            setGameState={setGameState}
+            socketInfo={socketInfo}
+            userInfo={userInfo}
+            targetUserInfo={targetUserInfo}
+          />
+        );
+      case GameState.INGAME:
+        return (
+          <Game
             setGameState={setGameState}
             socketInfo={socketInfo}
             userInfo={userInfo}

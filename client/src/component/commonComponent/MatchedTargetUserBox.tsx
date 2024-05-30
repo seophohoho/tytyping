@@ -9,6 +9,7 @@ function MatchedTargetUserBox(props: any) {
   useEffect(() => {
     console.log('TestComponent!!');
     console.log(userInfo); // 상대방의 데이터가 잘 들어왔음을 확인함.
+
     socketInfo.on('matching-ready-state', (data: any) => {
       setIsReady(data);
     });

@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from '../styles/CenterFrame.module.css';
+import styles from '../../styles/CenterFrame.module.css';
 
 interface CenterFrameProps {
   to: string;
 }
 
-const SInCenterFrame: React.FC<CenterFrameProps> = ({ to }) => {
+function SInCenterFrame({ to }: CenterFrameProps) {
   return (
     <div className={styles.centerFrame}>
       <p className={styles.topText}>Sign - In</p>
-      <div className={styles.blackLine}></div>
+      <div className={styles.blackLine} />
       <Link to={to} className={styles.nonlineButton}>
         Sign Up
       </Link>
@@ -18,13 +18,13 @@ const SInCenterFrame: React.FC<CenterFrameProps> = ({ to }) => {
         <Link to="/find-username" className={styles.nonlineFindButton1}>
           Forgot Your Username?
         </Link>
-        <span className={styles.separator}>|</span>
+        <span className={styles.separator} />
         <Link to="/find-password" className={styles.nonlineFindButton2}>
           Forgot Your Password?
         </Link>
       </div>
     </div>
   );
-};
+}
 
 export default SInCenterFrame;

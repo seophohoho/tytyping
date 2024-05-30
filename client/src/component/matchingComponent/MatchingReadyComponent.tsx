@@ -1,13 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styles from '../../styles/MatchingReady.module.css';
 import { GameState } from '../../constant/GameState';
 import MatchedUserBox from '../commonComponent/MatchedUserBox';
-import { traceDeprecation } from 'process';
 import MatchedTargetUserBox from '../commonComponent/MatchedTargetUserBox';
 
 function MatchingReadyComponent(props: any) {
-  const { setGameState, socketInfo, userInfo, targetUserInfo } = props; //<--check
-  const [btnClick, setBtnClick] = useState(false);
+  const { setGameState, socketInfo, userInfo, targetUserInfo } = props; // <--check
 
   const btnListner = () => {
     if (socketInfo) {
@@ -16,14 +14,9 @@ function MatchingReadyComponent(props: any) {
     }
   };
 
-  const readyListener = () => {
-    setBtnClick(!btnClick);
-    console.log('ready');
-  };
-
   useEffect(() => {
     console.log('TestComponent!!');
-    console.log(targetUserInfo); //상대방의 데이터가 잘 들어왔음을 확인함.
+    console.log(targetUserInfo); // 상대방의 데이터가 잘 들어왔음을 확인함.
     socketInfo.on('matching-ready-quiet', () => {
       alert('상대방이 나감.');
       setGameState(GameState.NONE);

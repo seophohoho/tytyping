@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import styles from '../styles/OutFrame.module.css';
+import styles from '../../styles/OutFrame.module.css';
 import FUCenterFrame from './FUCenterFrame';
 import FUInnerFrame from './FUInnerFrame';
 
-const FindUsernameForm: React.FC = () => {
+function FindUsernameForm() {
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
 
@@ -40,6 +40,6 @@ const FindUsernameForm: React.FC = () => {
       <FUInnerFrame email={email} onChange={handleChange} onSubmit={handleSubmit} />
     </div>
   );
-};
+}
 
 export default FindUsernameForm;

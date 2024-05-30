@@ -36,6 +36,19 @@
   cursor: pointer;
 }
 
+.targetMatchingBtn {
+  font-family: 'Courier Prime', Courier, monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 51px;
+  width: 193px;
+  font-size: 24px;
+  border: 2px solid black;
+  box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.2);
+  background: #6e6e6e;
+}
+
 .matchingBtn .matchingReady {
   margin-top: 43%;
 }

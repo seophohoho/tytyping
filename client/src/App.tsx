@@ -4,9 +4,9 @@ import { Routes, Route } from 'react-router-dom';
 import Main from './component/Main';
 import SignUpForm from './component/SignUpForm';
 import SignInForm from './component/SignInForm';
-import FindUsernameForm from './component/FindUsernameForm';
-import FindPasswordForm from './component/FindPasswordForm';
-import ResetPasswordForm from './component/ResetPasswordForm';
+import FindUsernameForm from './component/findComponent/FindUsernameForm';
+import FindPasswordForm from './component/findComponent/FindPasswordForm';
+import ResetPasswordForm from './component/findComponent/ResetPasswordForm';
 import Game from './component/Game';
 
 function App() {

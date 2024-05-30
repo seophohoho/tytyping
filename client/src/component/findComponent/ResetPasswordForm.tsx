@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import styles from '../styles/OutFrame.module.css';
+import styles from '../../styles/OutFrame.module.css';
 import RPCenterFrame from './RPCenterFrame';
 import RPInnerFrame from './RPInnerFrame';
 
-const ResetPasswordForm: React.FC = () => {
+function ResetPasswordForm() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
@@ -49,6 +49,6 @@ const ResetPasswordForm: React.FC = () => {
       />
     </div>
   );
-};
+}
 
 export default ResetPasswordForm;

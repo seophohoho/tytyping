@@ -1,15 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import styles from '../styles/FindCenterFrame.module.css';
+import styles from '../../styles/FindCenterFrame.module.css';
 
-const RPCenterFrame: React.FC = () => {
+function RPCenterFrame() {
   return (
     <div className={styles.centerFrame}>
       <p className={styles.topText}>Reset your password</p>
-      <div className={styles.blackLine}></div>
+      <div className={styles.blackLine} />
       <p className={styles.resetExplainText}>Please enter your new password</p>
     </div>
   );
-};
+}
 
 export default RPCenterFrame;

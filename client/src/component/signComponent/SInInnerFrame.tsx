@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/InnerFrame.module.css';
+import styles from '../../styles/InnerFrame.module.css';
 
 interface InnerFrameProps {
   formData: any;
@@ -7,7 +7,7 @@ interface InnerFrameProps {
   onSubmit: () => void;
 }
 
-const SInInnerFrame: React.FC<InnerFrameProps> = ({ formData, onChange, onSubmit }) => {
+function SInInnerFrame({ formData, onChange, onSubmit }: InnerFrameProps) {
   const { username, password } = formData;
 
   return (
@@ -32,11 +32,11 @@ const SInInnerFrame: React.FC<InnerFrameProps> = ({ formData, onChange, onSubmit
           onChange={(e) => onChange('password', e.target.value)}
         />
       </div>
-      <button className={styles.lineButtonverIn} onClick={onSubmit}>
+      <button type="button" className={styles.lineButtonverIn} onClick={onSubmit}>
         Sign In
       </button>
     </div>
   );
-};
+}
 
 export default SInInnerFrame;

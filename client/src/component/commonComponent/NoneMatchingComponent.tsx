@@ -1,10 +1,8 @@
-import { useState } from 'react';
 import styles from '../../styles/MatchingReady.module.css';
 import { GameState } from '../../constant/GameState';
 
 function NoneMatchingComponent(props: any) {
-  const { setGameState, socketInfo, userInfo, setTargetUserInfo } = props; //<--check
-  const [btnClick, setBtnClick] = useState(false);
+  const { setGameState, socketInfo, userInfo, setTargetUserInfo } = props; // <--check
 
   const matchingBtnListner = () => {
     setGameState(GameState.MATCHING);

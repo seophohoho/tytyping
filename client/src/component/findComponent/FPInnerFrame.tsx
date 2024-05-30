@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/FindInnerFrame.module.css';
+import styles from '../../styles/FindInnerFrame.module.css';
 
 interface FPInnerFrameProps {
   username: string;
@@ -9,7 +9,7 @@ interface FPInnerFrameProps {
   onSubmit: () => void;
 }
 
-const FPInnerFrame: React.FC<FPInnerFrameProps> = ({ username, email, onUsernameChange, onEmailChange, onSubmit }) => {
+function FPInnerFrame({ username, email, onUsernameChange, onEmailChange, onSubmit }: FPInnerFrameProps) {
   return (
     <div className={styles.innerFrame}>
       <div className={styles.inputContainer}>
@@ -26,11 +26,11 @@ const FPInnerFrame: React.FC<FPInnerFrameProps> = ({ username, email, onUsername
         <div className={styles.labelBox}>Email</div>
         <input type="email" className={styles.emailInput} placeholder=" " value={email} onChange={onEmailChange} />
       </div>
-      <button className={styles.lineButton} onClick={onSubmit}>
+      <button type="button" className={styles.lineButton} onClick={onSubmit}>
         OK
       </button>
     </div>
   );
-};
+}
 
 export default FPInnerFrame;

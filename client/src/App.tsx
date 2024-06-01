@@ -16,7 +16,7 @@ function App() {
       <Route path="/signin" element={<SignInForm />} />
       <Route path="/find-username" element={<FindUsernameForm />} />
       <Route path="/find-password" element={<FindPasswordForm />} />
-      <Route path="/reset-password" element={<ResetPasswordForm />} /> 
+      <Route path="/reset-password" element={<ResetPasswordForm />} />
     </Routes>
   );
 }

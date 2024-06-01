@@ -1,5 +1,5 @@
-import mariadb from 'mariadb';
-import { DBconnection } from './config';
+import mariadb from "mariadb";
+import { DBconnection } from "./config";
 
 const dbConfig = DBconnection();
 const pool = mariadb.createPool(dbConfig);
@@ -12,7 +12,7 @@ async function getUserInfoByUsername(username: string) {
     connection.release();
     return rows;
   } catch (error) {
-    console.error('Error retrieving user info:', error);
+    console.error("Error retrieving user info:", error);
     throw error;
   }
 }

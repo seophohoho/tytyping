@@ -11,9 +11,11 @@ const SUpCenterFrame: React.FC<CenterFrameProps> = ({ to }) => {
     <div className={styles.centerFrame}>
       <p className={styles.topText}>Sign - Up</p>
       <div className={styles.blackLine}></div>
-      <Link to={to} className={styles.nonlineButton}>Sign In</Link>
+      <Link to={to} className={styles.nonlineButton}>
+        Sign In
+      </Link>
     </div>
   );
-}
+};
 
 export default SUpCenterFrame;

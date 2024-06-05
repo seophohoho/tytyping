@@ -1,10 +1,11 @@
 .centerFrame {
   width: 800px;
   height: 400px;
-  background-color: #E0E0E0;
+  background-color: #e0e0e0;
   position: absolute;
-  top: 310px;   
-  left: 590px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border: 3px solid black; /* 검은색 테두리 추가 */
 }
 
@@ -15,7 +16,7 @@
   position: absolute;
   left: 50%;
   top: 30px;
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
 }
 
 .blackLine {
@@ -23,8 +24,9 @@
   height: 3px;
   background-color: #000000;
   position: absolute;
-  left: 0;
+  left: 50%;
   top: 60px;
+  transform: translateX(-50%);
 }
 
 .bottomLinks {
@@ -36,7 +38,7 @@
 .nonlineButton {
   font-family: 'Courier Prime', Courier, monospace;
   font-weight: bold;
-  width: 76px; 
+  width: 76px;
   height: 20px;
   font-size: 18px;
   text-align: center;
@@ -44,13 +46,13 @@
   cursor: pointer;
   left: 50%;
   top: 375px;
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
 }
 
 .nonlineFindButton1 {
   font-family: 'Courier Prime', Courier, monospace;
   font-weight: bold;
-  width: 300px; 
+  width: 300px;
   height: 16px;
   font-size: 18px;
   text-align: center;
@@ -58,13 +60,13 @@
   position: absolute;
   left: 30%;
   top: 300px;
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
 }
 
 .nonlineFindButton2 {
   font-family: 'Courier Prime', Courier, monospace;
   font-weight: bold;
-  width: 300px; 
+  width: 300px;
   height: 16px;
   font-size: 18px;
   text-align: center;
@@ -72,7 +74,7 @@
   position: absolute;
   left: 70%;
   top: 300px;
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
 }
 
 .separator {
@@ -83,5 +85,5 @@
   position: absolute;
   left: 50%;
   top: 300px;
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
 }

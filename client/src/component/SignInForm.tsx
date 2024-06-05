@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
-import SInCenterFrame from './signComponent/SInCenterFrame';
-import SInInnerFrame from './signComponent/SInInnerFrame';
+import SInCenterFrame from './SInCenterFrame';
+import SInInnerFrame from './SInInnerFrame';
 import styles from '../styles/OutFrame.module.css';
 
 interface FormData {
@@ -10,7 +10,7 @@ interface FormData {
   password: string;
 }
 
-function SignInForm() {
+const SignInForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     username: '',
     password: '',
@@ -28,7 +28,7 @@ function SignInForm() {
         return;
       }
 
-      await axios.post('http://localhost:8000/api/sign-in', formData);
+      const response = await axios.post('http://localhost:8000/api/sign-in', formData);
       alert('로그인이 완료되었습니다.');
       navigate('/main');
     } catch (error) {
@@ -54,6 +54,6 @@ function SignInForm() {
       />
     </div>
   );
-}
+};
 
 export default SignInForm;

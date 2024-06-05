@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import styles from '../../styles/OutFrame.module.css';
+import styles from '../styles/OutFrame.module.css';
 import FUCenterFrame from './FUCenterFrame';
 import FUInnerFrame from './FUInnerFrame';
 
-function FindUsernameForm() {
+const FindUsernameForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
 
@@ -19,6 +19,12 @@ function FindUsernameForm() {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
         alert('올바른 이메일 형식이 아닙니다.');
+        return;
+      }
+
+      // 특정 도메인만 허용
+      if (!email.endsWith('@gmail.com') && !email.endsWith('@naver.com')) {
+        alert('Gmail 또는 Naver 이메일만 허용됩니다.');
         return;
       }
 
@@ -40,6 +46,6 @@ function FindUsernameForm() {
       <FUInnerFrame email={email} onChange={handleChange} onSubmit={handleSubmit} />
     </div>
   );
-}
+};
 
 export default FindUsernameForm;

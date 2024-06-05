@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles/OutFrame.module.css';
-import SUpInnerFrame from './signComponent/SUpInnerFrame';
-import SInCenterFrame from './signComponent/SUpCenterFrame';
+import SUpInnerFrame from './SUpInnerFrame';
+import SInCenterFrame from './SUpCenterFrame';
 
-function SignUpForm() {
+const SignUpForm: React.FC = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -91,6 +91,6 @@ function SignUpForm() {
       <SUpInnerFrame formData={formData} onChange={handleChange} onSubmit={handleSubmit} />
     </div>
   );
-}
+};
 
 export default SignUpForm;

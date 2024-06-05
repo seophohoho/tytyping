@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from '../styles/FindCenterFrame.module.css';
+import styles from '../../styles/FindCenterFrame.module.css';
 
-const RPCenterFrame: React.FC = () => {
+function RPCenterFrame() {
   return (
     <div className={styles.centerFrame}>
       <p className={styles.topText}>Reset your password</p>
@@ -9,6 +9,6 @@ const RPCenterFrame: React.FC = () => {
       <p className={styles.resetExplainText}>Please enter your new password</p>
     </div>
   );
-};
+}
 
 export default RPCenterFrame;

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/InnerFrame.module.css';
+import styles from '../../styles/InnerFrame.module.css';
 
 interface InnerFrameProps {
   formData: {
@@ -12,7 +12,7 @@ interface InnerFrameProps {
   onSubmit: () => void;
 }
 
-const SUpInnerFrame: React.FC<InnerFrameProps> = ({ formData, onChange, onSubmit }) => {
+function SUpInnerFrame({ formData, onChange, onSubmit }: InnerFrameProps) {
   const { username, password, nickname, email } = formData;
 
   return (
@@ -62,6 +62,6 @@ const SUpInnerFrame: React.FC<InnerFrameProps> = ({ formData, onChange, onSubmit
       </button>
     </div>
   );
-};
+}
 
 export default SUpInnerFrame;

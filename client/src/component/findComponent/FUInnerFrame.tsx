@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/FindInnerFrame.module.css';
+import styles from '../../styles/FindInnerFrame.module.css';
 
 interface FUInnerFrameProps {
   email: string;
@@ -7,7 +7,7 @@ interface FUInnerFrameProps {
   onSubmit: () => void;
 }
 
-const FUInnerFrame: React.FC<FUInnerFrameProps> = ({ email, onChange, onSubmit }) => {
+function FUInnerFrame({ email, onChange, onSubmit }: FUInnerFrameProps) {
   return (
     <div className={styles.innerFrame}>
       <div className={styles.inputContainer}>
@@ -19,6 +19,6 @@ const FUInnerFrame: React.FC<FUInnerFrameProps> = ({ email, onChange, onSubmit }
       </div>
     </div>
   );
-};
+}
 
 export default FUInnerFrame;

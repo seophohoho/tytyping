@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/FindInnerFrame.module.css';
+import styles from '../../styles/FindInnerFrame.module.css';
 
 interface RPInnerFrameProps {
   newPassword: string;
@@ -9,13 +9,13 @@ interface RPInnerFrameProps {
   onSubmit: () => void;
 }
 
-const RPInnerFrame: React.FC<RPInnerFrameProps> = ({
+function RPInnerFrame({
   newPassword,
   confirmPassword,
   onNewPasswordChange,
   onConfirmPasswordChange,
   onSubmit,
-}) => {
+}: RPInnerFrameProps) {
   return (
     <div className={styles.innerFrame}>
       <div className={styles.inputContainer}>
@@ -43,6 +43,6 @@ const RPInnerFrame: React.FC<RPInnerFrameProps> = ({
       </button>
     </div>
   );
-};
+}
 
 export default RPInnerFrame;

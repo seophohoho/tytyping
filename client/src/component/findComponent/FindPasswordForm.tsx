@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import styles from '../styles/OutFrame.module.css';
+import styles from '../../styles/OutFrame.module.css';
 import FPCenterFrame from './FPCenterFrame';
 import FPInnerFrame from './FPInnerFrame';
 
-const FindPasswordForm: React.FC = () => {
+function FindPasswordForm() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
@@ -87,6 +87,6 @@ const FindPasswordForm: React.FC = () => {
       />
     </div>
   );
-};
+}
 
 export default FindPasswordForm;

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/FindInnerFrame.module.css';
+import styles from '../../styles/FindInnerFrame.module.css';
 
 interface FPInnerFrameProps {
   username: string;
@@ -13,8 +13,7 @@ interface FPInnerFrameProps {
   isVerificationSent: boolean;
   isVerificationChecked: boolean;
 }
-
-const FPInnerFrame: React.FC<FPInnerFrameProps> = ({
+function FPInnerFrame({
   username,
   email,
   verificationCode,
@@ -25,7 +24,7 @@ const FPInnerFrame: React.FC<FPInnerFrameProps> = ({
   onConfirm,
   isVerificationSent,
   isVerificationChecked,
-}) => {
+}: FPInnerFrameProps) {
   return (
     <div className={styles.innerFrame}>
       <div className={styles.inputContainer}>
@@ -66,6 +65,6 @@ const FPInnerFrame: React.FC<FPInnerFrameProps> = ({
       )}
     </div>
   );
-};
+}
 
 export default FPInnerFrame;

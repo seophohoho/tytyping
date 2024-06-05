@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from '../styles/FindCenterFrame.module.css';
+import styles from '../../styles/FindCenterFrame.module.css';
 
-const FPCenterFrame: React.FC = () => {
+function FPCenterFrame() {
   return (
     <div className={styles.centerFrame}>
       <p className={styles.topText}>Forgot your password?</p>
@@ -13,6 +13,6 @@ const FPCenterFrame: React.FC = () => {
       </Link>
     </div>
   );
-};
+}
 
 export default FPCenterFrame;

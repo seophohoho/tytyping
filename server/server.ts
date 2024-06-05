@@ -4,6 +4,8 @@ import userInfoRoute from "./src/routes/userInfoRoute";
 import signInRoute from "./src/routes/signInRoute";
 import signUpRoute from "./src/routes/signUpRoute";
 import findUsernameRoute from "./src/routes/findUsernameRoute";
+import findPasswordRoute from "./src/routes/findPasswordRoute";
+import resetPasswordRoute from "./src/routes/resetPasswordRoute";
 import socketio, { Socket } from "socket.io";
 import { createServer } from "http";
 import { Queue } from "queue-typescript";
@@ -28,7 +30,9 @@ app.use(cors());
 app.use("/userinfo", userInfoRoute);
 app.use("/api/sign-up", signUpRoute);
 app.use("/api/sign-in", signInRoute);
-app.use("/api/find-username", findUsernameRoute);
+app.use("/api/forgot-username", findUsernameRoute);
+app.use("/api/forgot-password", findPasswordRoute);
+app.use("/api/reset-password", resetPasswordRoute);
 app.use(
   cors({
     origin: "*",

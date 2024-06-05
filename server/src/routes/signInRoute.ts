@@ -1,8 +1,8 @@
-import express from 'express';
-import signinController from '../controllers/signInController';
+import express from "express";
+import signinController from "../controllers/signInController";
 
 const router = express.Router();
 
-router.post('/', signinController);
+router.post("/", signinController);
 
 export default router;

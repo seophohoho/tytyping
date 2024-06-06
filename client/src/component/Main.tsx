@@ -23,7 +23,7 @@ function Main() {
     // user정보 업데이트 함수
     const fetchUserInfo = async () => {
       try {
-        const res = await axios.post(`${serverUrl}/userinfo`, { username: 'test' }); // 차후 수정 필요. 닉네임 test인 유저 검색.
+        const res = await axios.post(`${serverUrl}/userinfo`, { username: localStorage.getItem('userData') }); // 차후 수정 필요. 닉네임 test인 유저 검색.
         if (res.status === 200) {
           setUserInfo({ nickname: res.data });
           setIsUserInfoSet(true);

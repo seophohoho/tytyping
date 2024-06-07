@@ -10,6 +10,7 @@ import NoneMatchingComponent from './commonComponent/NoneMatchingComponent';
 
 import MatchingReadyComponent from './matchingComponent/MatchingReadyComponent';
 import styles from '../styles/Main.module.css';
+import Game from './Game';
 
 function Main() {
   const [socketInfo, setSocketInfo] = useState<Socket | null>(null);
@@ -25,6 +26,7 @@ function Main() {
       try {
         const res = await axios.post(`${serverUrl}/userinfo`, { username: localStorage.getItem('userData') }); // 차후 수정 필요. 닉네임 test인 유저 검색.
         if (res.status === 200) {
+          console.log(res.data);
           setUserInfo({ nickname: res.data });
           setIsUserInfoSet(true);
         }
@@ -52,6 +54,10 @@ function Main() {
 
     rootSocket.on('disconnect', () => {
       console.log('socket disconnected');
+    });
+
+    rootSocket.on('game_start', () => {
+      setGameState(GameState.INGAME);
     });
 
     return () => {
@@ -83,6 +89,8 @@ function Main() {
             targetUserInfo={targetUserInfo}
           />
         );
+      case GameState.INGAME:
+        return <Game />;
       default:
         return null;
     }

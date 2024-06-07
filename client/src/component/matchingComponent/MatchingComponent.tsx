@@ -17,7 +17,7 @@ const MatchingComponent: React.FC<MatchingComponentProps> = (props) => {
 
   const btnListner = () => {
     if (socketInfo) {
-      socketInfo.emit('cancel-matching', { nickname: userInfo.nickname, socketId: socketInfo.id });
+      socketInfo.emit('matching_cancel', { nickname: userInfo.nickname, socketId: socketInfo.id });
       setGameState(GameState.NONE);
     }
   };

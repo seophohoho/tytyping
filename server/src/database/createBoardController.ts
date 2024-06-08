@@ -4,8 +4,7 @@ import { DBconnection } from "./config";
 const dbConfig = DBconnection();
 const pool = mariadb.createPool(dbConfig);
 
-async function createBoard(title: string, writer: string) {
-  // 수정된 부분
+async function createBoard(title: string, writer: string, content: string) {
   console.log(title);
   try {
     const connection = await pool.getConnection();
@@ -14,8 +13,8 @@ async function createBoard(title: string, writer: string) {
     const solve = false;
 
     const query =
-      "INSERT INTO board (title, writer, date, solve) VALUES (?, ?, ?, ?)";
-    await connection.query(query, [title, writer, date, solve]);
+      "INSERT INTO board (title, writer, content, date, solve) VALUES (?, ?, ?, ?, ?)";
+    await connection.query(query, [title, writer, content, date, solve]);
 
     connection.release();
     console.log("data insert successful");

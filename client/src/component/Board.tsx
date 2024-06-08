@@ -12,11 +12,15 @@ function Board() {
     setBoardState({ state: 'write' });
   };
 
+  const handleBoardStateChange = (state: string) => {
+    setBoardState({ state });
+  };
+
   const renderBoardComponent = () => {
     if (boardState.state === 'read') {
       return <BoardReadComponent onWriteBtnClick={handleWriteBtn} />;
     }
-    return <BoardWriteComponent />;
+    return <BoardWriteComponent userInfo={userInfo} onRegisterSuccess={() => handleBoardStateChange('read')} />;
   };
 
   return (

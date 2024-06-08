@@ -4,10 +4,10 @@ import { createBoard } from "../database/createBoardController";
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-  const { title, writer } = req.body;
+  const { title, writer, content } = req.body;
 
   try {
-    await createBoard(title, writer);
+    await createBoard(title, writer, content);
     res.status(201).json({ message: "Board created successfully" });
   } catch (error) {
     console.error("Error creating board: ", error);

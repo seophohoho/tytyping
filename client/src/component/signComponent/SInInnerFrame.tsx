@@ -32,7 +32,7 @@ function SInInnerFrame({ formData, onChange, onSubmit }: InnerFrameProps) {
           onChange={(e) => onChange('password', e.target.value)}
         />
       </div>
-      <button className={styles.lineButtonverIn} onClick={onSubmit}>
+      <button type="button" className={styles.lineButtonverIn} onClick={onSubmit}>
         Sign In
       </button>
     </div>

@@ -10,7 +10,7 @@ function SUpCenterFrame({ to }: CenterFrameProps) {
   return (
     <div className={styles.centerFrame}>
       <p className={styles.topText}>Sign - Up</p>
-      <div className={styles.blackLine}></div>
+      <div className={styles.blackLine} />
       <Link to={to} className={styles.nonlineButton}>
         Sign In
       </Link>

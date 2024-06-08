@@ -57,7 +57,7 @@ function SUpInnerFrame({ formData, onChange, onSubmit }: InnerFrameProps) {
           onChange={(e) => onChange('email', e.target.value)}
         />
       </div>
-      <button className={styles.lineButton} onClick={onSubmit}>
+      <button type="button" className={styles.lineButton} onClick={onSubmit}>
         Sign Up
       </button>
     </div>

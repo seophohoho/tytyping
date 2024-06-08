@@ -7,8 +7,10 @@ import findUsernameRoute from "./src/routes/findUsernameRoute";
 import findPasswordRoute from "./src/routes/findPasswordRoute";
 import resetPasswordRoute from "./src/routes/resetPasswordRoute";
 import boardRoute from "./src/routes/boardRoute";
+import inGameRoute from "./src/routes/inGameRoute";
 import socketio, { Socket } from "socket.io";
 import { createServer } from "http";
+import { all } from "axios";
 
 const app = express();
 const PORT = 8000;
@@ -25,6 +27,13 @@ const rootRoom = ioServer.of("/");
 
 app.use(express.json());
 app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST"],
+  })
+);
+
 app.use("/userinfo", userInfoRoute);
 app.use("/api/sign-up", signUpRoute);
 app.use("/api/sign-in", signInRoute);
@@ -32,13 +41,8 @@ app.use("/api/forgot-username", findUsernameRoute);
 app.use("/api/forgot-password", findPasswordRoute);
 app.use("/api/reset-password", resetPasswordRoute);
 app.use("/board", boardRoute);
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST"],
-  })
-);
-app.use("/userinfo", userInfoRoute);
+
+app.use("/ingame", inGameRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -68,6 +72,7 @@ interface UserData {
   nickname: string;
   socketId: string;
   state: string;
+  turn: number;
 }
 
 interface GameRoomData {
@@ -96,6 +101,7 @@ rootRoom.on("connection", (socket) => {
       nickname: data["userInfo"].nickname,
       socketId: socket.id,
       state: "none",
+      turn: -1,
     };
   });
 
@@ -134,6 +140,9 @@ rootRoom.on("connection", (socket) => {
       const randomBitA = Math.floor(Math.random() * 2);
       const randomBitB = randomBitA ? 0 : 1;
 
+      allUsers[socket.id].turn = randomBitB;
+      allUsers[data.userInfo.socketId].turn = randomBitA;
+
       const randomWord = Math.floor(Math.random() * startWord.length);
 
       rootRoom.to(data.userInfo.socketId).emit("game_start", {
@@ -151,6 +160,19 @@ rootRoom.on("connection", (socket) => {
     allUsers[socket.id].state = "none";
     allUsers[data.userInfo.socketId].state = "none";
     rootRoom.to(data.userInfo.socketId).emit("waiting_target_cancel", true);
+  });
+
+  socket.on("ingame_my_input", (data: any) => {
+    rootRoom
+      .to(data.targetUserInfo.socketId)
+      .emit("ingame_target_input", { input: data.input, result: data.result });
+  });
+
+  socket.on("ingame_change_request", (data: any) => {
+    allUsers[socket.id].turn = 0;
+    allUsers[data.targetUserInfo.socketId].turn = 1;
+    rootRoom.to(socket.id).emit("ingame_change_response", { turn: 0 });
+    rootRoom.to(socket.id).emit("ingame_change_response", { turn: 1 });
   });
 
   socket.on("disconnect", (data: any) => {

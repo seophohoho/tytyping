@@ -20,6 +20,7 @@ function Main() {
   const [gameState, setGameState] = useState(GameState.NONE);
   const [targetUserInfo, setTargetUserInfo] = useState({ nickname: '' });
 
+  const [initGameInfo, setInitGameInfo] = useState({});
   // 컴포넌트 mount 시 동작
   useEffect(() => {
     // user정보 업데이트 함수
@@ -57,7 +58,8 @@ function Main() {
       console.log('socket disconnected');
     });
 
-    rootSocket.on('game_start', () => {
+    rootSocket.on('game_start', (data: any) => {
+      setInitGameInfo(data);
       setGameState(GameState.INGAME);
     });
 
@@ -91,7 +93,15 @@ function Main() {
           />
         );
       case GameState.INGAME:
-        return <Game />;
+        return (
+          <Game
+            userInfo={userInfo}
+            targetUserInfo={targetUserInfo}
+            socketInfo={socketInfo}
+            setGameState={setGameState}
+            initGameInfo={initGameInfo}
+          />
+        );
       case GameState.BOARD:
         return <Board />;
       default:

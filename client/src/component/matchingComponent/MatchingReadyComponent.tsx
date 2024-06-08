@@ -10,15 +10,13 @@ function MatchingReadyComponent(props: any) {
   const btnListner = () => {
     if (socketInfo) {
       setGameState(GameState.NONE);
-      socketInfo.emit('cancel-matching-ready', { user: targetUserInfo });
+      socketInfo.emit('waiting_my_cancel', { userInfo: targetUserInfo });
     }
   };
 
   useEffect(() => {
-    console.log('TestComponent!!');
-    console.log(targetUserInfo); // 상대방의 데이터가 잘 들어왔음을 확인함.
-    socketInfo.on('matching-ready-quiet', () => {
-      alert('상대방이 나감.');
+    socketInfo.on('waiting_target_cancel', () => {
+      alert('상대방이 나갔습니다.');
       setGameState(GameState.NONE);
     });
   }, []);

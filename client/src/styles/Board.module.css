@@ -1,0 +1,91 @@
+.board_container {
+  height: 100%;
+  width: 80%;
+  max-width: 800px;
+}
+
+.board_header_container {
+  width: 100%;
+  margin-top: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 16px;
+}
+
+.board_title {
+  font-size: 24px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.board_table {
+  width: 100%;
+  border-top: 2px solid #000;
+  border-collapse: collapse;
+}
+
+.board_btn {
+  width: 100px;
+  height: 32px;
+
+  border: 2px solid #5c5c5c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 15px;
+
+  cursor: pointer;
+}
+
+.board_write_container {
+  width: 100%;
+  height: 80%;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid #d2d2d2;
+  padding: 8px;
+}
+.board_write_title {
+  font-size: 16px;
+  padding: 16px 12px;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #000;
+  background: #eee;
+}
+
+.board_write_content {
+  width: 100%;
+  height: 100%;
+
+  margin-top: 4px;
+  padding: 16px 12px;
+  background: #eee;
+
+  outline: none;
+  border: none;
+  resize: none;
+
+  font-size: 15px;
+}
+
+th,
+td {
+  text-align: center;
+}
+
+th {
+  border-bottom: 1px solid #000;
+}
+
+td {
+  border-bottom: 1px solid #d2d2d2;
+}
+
+tr {
+  height: 40px;
+}

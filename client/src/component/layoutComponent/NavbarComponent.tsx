@@ -12,6 +12,9 @@ function NavbarComponent(props: any) {
           <p className={`${styles.navLink}`}>{userInfo}</p>
         </li>
         <li>
+          <button type="button" className={`${styles.navLink} ${styles.logout}`} style={{ margin: '0 10px 0 0' }}>
+            Board
+          </button>
           <button type="button" className={`${styles.navLink} ${styles.logout}`}>
             Log Out
           </button>

@@ -30,6 +30,7 @@ function SignInForm() {
 
       await axios.post('http://localhost:8000/api/sign-in', formData);
       alert('로그인이 완료되었습니다.');
+      localStorage.setItem('userData', formData.username);
       navigate('/main');
     } catch (error) {
       console.error('Error during sign-in:', error);

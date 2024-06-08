@@ -8,8 +8,6 @@ import findPasswordRoute from "./src/routes/findPasswordRoute";
 import resetPasswordRoute from "./src/routes/resetPasswordRoute";
 import socketio, { Socket } from "socket.io";
 import { createServer } from "http";
-import { Queue } from "queue-typescript";
-import { match } from "assert";
 
 const app = express();
 const PORT = 8000;
@@ -115,13 +113,14 @@ rootRoom.on("connection", (socket) => {
   });
 
   socket.on("waiting_my_state", (data: any) => {
-    if (allUsers[socket.id].state === "waiting_0") {
+    if (data.state) {
       allUsers[socket.id].state = "waiting_1";
-
-      rootRoom
-        .to(data.userInfo.socketId)
-        .emit("waiting_target_state", data.state);
+    } else {
+      allUsers[socket.id].state = "waiting_0";
     }
+    rootRoom
+      .to(data.userInfo.socketId)
+      .emit("waiting_target_state", data.state);
 
     if (
       allUsers[socket.id].state === "waiting_1" &&
@@ -129,8 +128,20 @@ rootRoom.on("connection", (socket) => {
     ) {
       allUsers[socket.id].state = "ingame";
       allUsers[data.userInfo.socketId].state = "ingame";
-      rootRoom.to(data.userInfo.socketId).emit("game_start", true);
-      rootRoom.to(socket.id).emit("game_start", true);
+
+      const randomBitA = Math.floor(Math.random() * 2);
+      const randomBitB = randomBitA ? 0 : 1;
+
+      const randomWord = Math.floor(Math.random() * startWord.length);
+
+      rootRoom.to(data.userInfo.socketId).emit("game_start", {
+        turn: randomBitA,
+        initWord: startWord[randomWord],
+      });
+      rootRoom.to(socket.id).emit("game_start", {
+        turn: randomBitB,
+        initWord: startWord[randomWord],
+      });
     }
   });
 
@@ -144,3 +155,111 @@ rootRoom.on("connection", (socket) => {
     delete allUsers[socket.id];
   });
 });
+
+const initialConsonants: string[] = [
+  "ㄱ",
+  "ㄲ",
+  "ㄴ",
+  "ㄷ",
+  "ㄸ",
+  "ㄹ",
+  "ㅁ",
+  "ㅂ",
+  "ㅃ",
+  "ㅅ",
+  "ㅆ",
+  "ㅇ",
+  "ㅈ",
+  "ㅉ",
+  "ㅊ",
+  "ㅋ",
+  "ㅌ",
+  "ㅍ",
+  "ㅎ",
+];
+
+const vowels: string[] = [
+  "ㅏ",
+  "ㅐ",
+  "ㅑ",
+  "ㅒ",
+  "ㅓ",
+  "ㅔ",
+  "ㅕ",
+  "ㅖ",
+  "ㅗ",
+  "ㅘ",
+  "ㅙ",
+  "ㅚ",
+  "ㅛ",
+  "ㅜ",
+  "ㅝ",
+  "ㅞ",
+  "ㅟ",
+  "ㅠ",
+  "ㅡ",
+  "ㅢ",
+  "ㅣ",
+];
+
+// 초성, 중성, 종성 인덱스
+const initialIndex: { [key: string]: number } = {
+  ㄱ: 0,
+  ㄲ: 1,
+  ㄴ: 2,
+  ㄷ: 3,
+  ㄸ: 4,
+  ㄹ: 5,
+  ㅁ: 6,
+  ㅂ: 7,
+  ㅃ: 8,
+  ㅅ: 9,
+  ㅆ: 10,
+  ㅇ: 11,
+  ㅈ: 12,
+  ㅉ: 13,
+  ㅊ: 14,
+  ㅋ: 15,
+  ㅌ: 16,
+  ㅍ: 17,
+  ㅎ: 18,
+};
+
+const vowelIndex: { [key: string]: number } = {
+  ㅏ: 0,
+  ㅐ: 1,
+  ㅑ: 2,
+  ㅒ: 3,
+  ㅓ: 4,
+  ㅔ: 5,
+  ㅕ: 6,
+  ㅖ: 7,
+  ㅗ: 8,
+  ㅘ: 9,
+  ㅙ: 10,
+  ㅚ: 11,
+  ㅛ: 12,
+  ㅜ: 13,
+  ㅝ: 14,
+  ㅞ: 15,
+  ㅟ: 16,
+  ㅠ: 17,
+  ㅡ: 18,
+  ㅢ: 19,
+  ㅣ: 20,
+};
+
+// 한글 유니코드 시작값
+const HANGUL_START = 0xac00;
+
+const startWord: string[] = [];
+
+for (const initial of initialConsonants) {
+  for (const vowel of vowels) {
+    const unicode =
+      HANGUL_START + initialIndex[initial] * 21 * 28 + vowelIndex[vowel] * 28;
+    startWord.push(String.fromCharCode(unicode));
+  }
+}
+
+console.log(startWord.length);

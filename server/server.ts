@@ -172,7 +172,9 @@ rootRoom.on("connection", (socket) => {
     allUsers[socket.id].turn = 0;
     allUsers[data.targetUserInfo.socketId].turn = 1;
     rootRoom.to(socket.id).emit("ingame_change_response", { turn: 0 });
-    rootRoom.to(socket.id).emit("ingame_change_response", { turn: 1 });
+    rootRoom
+      .to(data.targetUserInfo.socketId)
+      .emit("ingame_change_response", { turn: 1 });
   });
 
   socket.on("disconnect", (data: any) => {
@@ -180,110 +182,51 @@ rootRoom.on("connection", (socket) => {
   });
 });
 
-const initialConsonants: string[] = [
-  "ㄱ",
-  "ㄲ",
-  "ㄴ",
-  "ㄷ",
-  "ㄸ",
-  "ㄹ",
-  "ㅁ",
-  "ㅂ",
-  "ㅃ",
-  "ㅅ",
-  "ㅆ",
-  "ㅇ",
-  "ㅈ",
-  "ㅉ",
-  "ㅊ",
-  "ㅋ",
-  "ㅌ",
-  "ㅍ",
-  "ㅎ",
+const startWord: string[] = [
+  "가",
+  "나",
+  "다",
+  "라",
+  "마",
+  "바",
+  "사",
+  "아",
+  "자",
+  "차",
+  "카",
+  "타",
+  "파",
+  "하",
+  "기",
+  "니",
+  "디",
+  "리",
+  "미",
+  "비",
+  "시",
+  "이",
+  "지",
+  "치",
+  "키",
+  "티",
+  "피",
+  "히",
+  "고",
+  "노",
+  "도",
+  "모",
+  "보",
+  "소",
+  "오",
+  "조",
+  "초",
+  "코",
+  "토",
+  "포",
+  "호",
+  "괴",
+  "왜",
+  "외",
 ];
-
-const vowels: string[] = [
-  "ㅏ",
-  "ㅐ",
-  "ㅑ",
-  "ㅒ",
-  "ㅓ",
-  "ㅔ",
-  "ㅕ",
-  "ㅖ",
-  "ㅗ",
-  "ㅘ",
-  "ㅙ",
-  "ㅚ",
-  "ㅛ",
-  "ㅜ",
-  "ㅝ",
-  "ㅞ",
-  "ㅟ",
-  "ㅠ",
-  "ㅡ",
-  "ㅢ",
-  "ㅣ",
-];
-
-// 초성, 중성, 종성 인덱스
-const initialIndex: { [key: string]: number } = {
-  ㄱ: 0,
-  ㄲ: 1,
-  ㄴ: 2,
-  ㄷ: 3,
-  ㄸ: 4,
-  ㄹ: 5,
-  ㅁ: 6,
-  ㅂ: 7,
-  ㅃ: 8,
-  ㅅ: 9,
-  ㅆ: 10,
-  ㅇ: 11,
-  ㅈ: 12,
-  ㅉ: 13,
-  ㅊ: 14,
-  ㅋ: 15,
-  ㅌ: 16,
-  ㅍ: 17,
-  ㅎ: 18,
-};
-
-const vowelIndex: { [key: string]: number } = {
-  ㅏ: 0,
-  ㅐ: 1,
-  ㅑ: 2,
-  ㅒ: 3,
-  ㅓ: 4,
-  ㅔ: 5,
-  ㅕ: 6,
-  ㅖ: 7,
-  ㅗ: 8,
-  ㅘ: 9,
-  ㅙ: 10,
-  ㅚ: 11,
-  ㅛ: 12,
-  ㅜ: 13,
-  ㅝ: 14,
-  ㅞ: 15,
-  ㅟ: 16,
-  ㅠ: 17,
-  ㅡ: 18,
-  ㅢ: 19,
-  ㅣ: 20,
-};
-
-// 한글 유니코드 시작값
-const HANGUL_START = 0xac00;
-
-const startWord: string[] = [];
-
-for (const initial of initialConsonants) {
-  for (const vowel of vowels) {
-    const unicode =
-      HANGUL_START + initialIndex[initial] * 21 * 28 + vowelIndex[vowel] * 28;
-    startWord.push(String.fromCharCode(unicode));
-  }
-}
 
 console.log(startWord.length);

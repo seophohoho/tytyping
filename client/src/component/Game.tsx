@@ -24,6 +24,7 @@ function Game(props: any) {
     });
     socketInfo.on('ingame_change_response', (data: any) => {
       console.log('turn is over!');
+      setIsTurn(data.turn);
       console.log(data);
     });
   }, []);

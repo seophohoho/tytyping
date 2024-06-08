@@ -8,6 +8,7 @@ import FindUsernameForm from './component/findComponent/FindUsernameForm';
 import FindPasswordForm from './component/findComponent/FindPasswordForm';
 import ResetPasswordForm from './component/findComponent/ResetPasswordForm';
 import Game from './component/Game';
+import Board from './component/Board';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path="/find-password" element={<FindPasswordForm />} />
       <Route path="/reset-password" element={<ResetPasswordForm />} />
       <Route path="/game" element={<Game />} />
+      <Route path="/board" element={<Board />} />
     </Routes>
   );
 }

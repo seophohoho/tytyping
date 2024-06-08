@@ -38,7 +38,7 @@ function RPInnerFrame({
           onChange={onConfirmPasswordChange}
         />
       </div>
-      <button className={styles.lineButton} onClick={onSubmit}>
+      <button type="button" className={styles.lineButton} onClick={onSubmit}>
         OK
       </button>
     </div>

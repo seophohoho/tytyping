@@ -42,7 +42,7 @@ function FPInnerFrame({
         <input type="email" className={styles.emailInput} placeholder=" " value={email} onChange={onEmailChange} />
       </div>
       {!isVerificationChecked && (
-        <button className={styles.lineButton} onClick={onCheck}>
+        <button type="button" className={styles.lineButton} onClick={onCheck}>
           Check
         </button>
       )}
@@ -58,7 +58,7 @@ function FPInnerFrame({
               onChange={onVerificationCodeChange}
             />
           </div>
-          <button className={styles.confirmButton} onClick={onConfirm}>
+          <button type="button" className={styles.confirmButton} onClick={onConfirm}>
             Confirm
           </button>
         </>

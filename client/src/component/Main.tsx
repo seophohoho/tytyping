@@ -11,6 +11,7 @@ import NoneMatchingComponent from './commonComponent/NoneMatchingComponent';
 import MatchingReadyComponent from './matchingComponent/MatchingReadyComponent';
 import styles from '../styles/Main.module.css';
 import Game from './Game';
+import Board from './Board';
 
 function Main() {
   const [socketInfo, setSocketInfo] = useState<Socket | null>(null);
@@ -91,6 +92,8 @@ function Main() {
         );
       case GameState.INGAME:
         return <Game />;
+      case GameState.BOARD:
+        return <Board />;
       default:
         return null;
     }

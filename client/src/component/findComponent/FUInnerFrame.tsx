@@ -13,7 +13,7 @@ function FUInnerFrame({ email, onChange, onSubmit }: FUInnerFrameProps) {
       <div className={styles.inputContainer}>
         <div className={styles.labelBox}>email</div>
         <input type="email" className={styles.emailInput} placeholder=" " value={email} onChange={onChange} />
-        <button className={styles.lineButton} onClick={onSubmit}>
+        <button type="button" className={styles.lineButton} onClick={onSubmit}>
           OK
         </button>
       </div>

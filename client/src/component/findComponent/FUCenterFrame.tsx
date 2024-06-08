@@ -6,7 +6,7 @@ function FUCenterFrame() {
   return (
     <div className={styles.centerFrame}>
       <p className={styles.topText}>Forgot your username?</p>
-      <div className={styles.blackLine}></div>
+      <div className={styles.blackLine} />
       <p className={styles.usernameexplainText}>Please enter your email</p>
       <Link to="/signin" className={styles.nonlineButton}>
         Sign In

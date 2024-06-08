@@ -5,7 +5,6 @@ const dbConfig = DBconnection();
 const pool = mariadb.createPool(dbConfig);
 
 async function createBoard(title: string, writer: string, content: string) {
-  console.log(title);
   try {
     const connection = await pool.getConnection();
 

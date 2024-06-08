@@ -16,8 +16,13 @@ function BoardWriteComponent({ userInfo, onRegisterSuccess }: Props) {
   const [content, setContent] = useState('');
 
   const handleWrite = () => {
+    if (!title.trim() || !content.trim()) {
+      alert('제목과 내용을 입력해주세요.');
+      return;
+    }
+
     try {
-      axios.post('http://localhost:8000/board', {
+      axios.post('http://localhost:8000/board/write', {
         title,
         writer: userInfo.nickname,
         content,

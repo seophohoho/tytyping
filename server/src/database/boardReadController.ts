@@ -9,7 +9,8 @@ async function readBoard() {
     const connection = await pool.getConnection();
     const rows = await connection.query("SELECT * FROM board");
     connection.release();
-    return rows;
+    const formattedDate = new Date(rows[0].date).toISOString().split("T")[0];
+    return { ...rows[0], date: formattedDate };
   } catch (error) {
     throw error;
   }

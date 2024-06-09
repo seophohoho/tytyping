@@ -58,4 +58,5 @@ p {
   width: 120px;
   height: 42px;
   box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }

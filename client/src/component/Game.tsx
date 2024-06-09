@@ -8,10 +8,9 @@ import { GameState } from '../constant/GameState';
 function Game(props: any) {
   const { userInfo, targetUserInfo, socketInfo, setGameState, initGameInfo } = props;
 
-  const [isTurn, setIsTurn] = useState(null);
+  const [isTurn, setIsTurn] = useState<number | null>(null);
   const [startWord, setStartWord] = useState('');
   const [inputValue, setInputValue] = useState('');
-  // const [inputValueResult, setIsInputValueResult] = useState('');
   const [isCorrect, setIsCorrect] = useState(false);
   const [round] = useState(1);
   const progressBarRef = useRef<HTMLDivElement>(null);
@@ -41,7 +40,7 @@ function Game(props: any) {
         setGameState(GameState.NONE);
       }
     });
-  }, [initGameInfo, socketInfo]);
+  }, [initGameInfo, socketInfo, setGameState]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value.trim());
@@ -90,11 +89,11 @@ function Game(props: any) {
       timerRef.current = setTimeout(() => {
         console.log('제한 시간 끝!');
         if (isTurn) {
-          socketInfo.emit('ingame_result_request', { targetUserInfo: targetUserInfo });
+          socketInfo.emit('ingame_result_request', { targetUserInfo });
         }
-      }, 15000);
+      }, 5000);
     }
-  }, [startWord]);
+  }, [startWord, isTurn, socketInfo, targetUserInfo]);
 
   return (
     <div className={`${styles.App}`}>

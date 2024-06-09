@@ -1,12 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import styles from '../styles/Main.module.css';
 import NavbarComponent from './layoutComponent/NavbarComponent';
 import BoardReadComponent from './boardComponent/BoardReadComponent';
 import BoardWriteComponent from './boardComponent/BoardWriteComponent';
+import { serverUrl } from '../config/serverUrl';
 
 function Board() {
   const [boardState, setBoardState] = useState({ state: 'read' });
-  const [userInfo] = useState({ nickname: 'test' });
+  const [userInfo, setUserInfo] = useState({ nickname: 'test' });
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const res = await axios.post(`${serverUrl}/userinfo`, { username: localStorage.getItem('userData') });
+        if (res.status === 200) {
+          console.log(res.data);
+          setUserInfo({ nickname: res.data });
+        }
+      } catch (error) {
+        console.error('Failed to fetch user info:', error);
+      }
+    };
+
+    fetchUserInfo();
+  }, []);
 
   const handleWriteBtn = () => {
     setBoardState({ state: 'write' });

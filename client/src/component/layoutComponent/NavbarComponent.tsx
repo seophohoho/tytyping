@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from '../../styles/Navbar.module.css';
 
 function NavbarComponent(props: any) {
@@ -13,7 +14,7 @@ function NavbarComponent(props: any) {
         </li>
         <li>
           <button type="button" className={`${styles.navLink} ${styles.logout}`} style={{ margin: '0 10px 0 0' }}>
-            Board
+            <Link to="/board">Board</Link>
           </button>
           <button type="button" className={`${styles.navLink} ${styles.logout}`}>
             Log Out

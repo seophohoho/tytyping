@@ -171,7 +171,9 @@ rootRoom.on("connection", (socket) => {
   socket.on("ingame_change_request", (data: any) => {
     allUsers[socket.id].turn = 0;
     allUsers[data.targetUserInfo.socketId].turn = 1;
-    rootRoom.to(socket.id).emit("ingame_change_response", { turn: 0 });
+    rootRoom
+      .to(data.targetUserInfo.socketId)
+      .emit("ingame_change_response", { turn: 0 });
     rootRoom.to(socket.id).emit("ingame_change_response", { turn: 1 });
   });
 

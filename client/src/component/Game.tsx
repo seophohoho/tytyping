@@ -32,6 +32,8 @@ function Game(props: any) {
     setInputValue(e.target.value);
   };
 
+  // useEffect(() => {}, [data]);
+
   const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && isTurn === 1 && inputValue.charAt(0) === startWord) {
       try {
@@ -50,6 +52,7 @@ function Game(props: any) {
       } catch (error) {
         console.error('Error submitting word:', error);
       } finally {
+        console.log(isTurn);
         setInputValue('');
       }
     }

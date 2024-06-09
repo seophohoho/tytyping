@@ -3,9 +3,10 @@ import axios from 'axios';
 import styles from '../styles/Main.module.css';
 import btn from '../styles/MatchingReady.module.css';
 import game from '../styles/Game.module.css';
+import { GameState } from '../constant/GameState';
 
 function Game(props: any) {
-  const { userInfo, targetUserInfo, socketInfo, initGameInfo } = props;
+  const { userInfo, targetUserInfo, socketInfo, setGameState, initGameInfo } = props;
 
   const [isTurn, setIsTurn] = useState(null);
   const [startWord, setStartWord] = useState('');
@@ -29,6 +30,16 @@ function Game(props: any) {
       setStartWord(data.startWord);
       setInputValue('');
       console.log(data);
+    });
+    socketInfo.on('ingame_result_response', (data: any) => {
+      console.log(data);
+      if (data.result) {
+        alert('승리!');
+        setGameState(GameState.NONE);
+      } else {
+        alert('패배!');
+        setGameState(GameState.NONE);
+      }
     });
   }, [initGameInfo, socketInfo]);
 
@@ -78,6 +89,9 @@ function Game(props: any) {
 
       timerRef.current = setTimeout(() => {
         console.log('제한 시간 끝!');
+        if (isTurn) {
+          socketInfo.emit('ingame_result_request', { targetUserInfo: targetUserInfo });
+        }
       }, 15000);
     }
   }, [startWord]);

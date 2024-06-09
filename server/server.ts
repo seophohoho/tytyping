@@ -10,7 +10,6 @@ import boardRoute from "./src/routes/boardRoute";
 import inGameRoute from "./src/routes/inGameRoute";
 import socketio, { Socket } from "socket.io";
 import { createServer } from "http";
-import { all } from "axios";
 
 const app = express();
 const PORT = 8000;
@@ -171,10 +170,19 @@ rootRoom.on("connection", (socket) => {
   socket.on("ingame_change_request", (data: any) => {
     allUsers[socket.id].turn = 0;
     allUsers[data.targetUserInfo.socketId].turn = 1;
-    rootRoom.to(socket.id).emit("ingame_change_response", { turn: 0 });
+    rootRoom
+      .to(socket.id)
+      .emit("ingame_change_response", { turn: 0, startWord: data.startWord });
     rootRoom
       .to(data.targetUserInfo.socketId)
-      .emit("ingame_change_response", { turn: 1 });
+      .emit("ingame_change_response", { turn: 1, startWord: data.startWord });
+  });
+
+  socket.on("ingame_result_request", (data: any) => {
+    rootRoom.to(socket.id).emit("ingame_result_response", { result: 0 });
+    rootRoom
+      .to(data.targetUserInfo.socketId)
+      .emit("ingame_result_response", { result: 1 });
   });
 
   socket.on("disconnect", (data: any) => {

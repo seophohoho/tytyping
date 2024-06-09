@@ -9,6 +9,7 @@ function Game(props: any) {
 
   const [isTurn, setIsTurn] = useState(null);
   const [startWord, setStartWord] = useState('');
+  const [inputValueResult, setIsInputValueResult] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [isCorrect, setIsCorrect] = useState(false);
   const [round] = useState(1);
@@ -17,23 +18,29 @@ function Game(props: any) {
     setStartWord(initGameInfo.initWord);
     setIsTurn(initGameInfo.turn);
     socketInfo.on('ingame_target_input', (data: any) => {
-      // data에는 상대방이 작성한 단어와 올바른 단어인지 틀린 단어인지 판별하는 값이 있다.
-      console.log(data);
       setInputValue(data.input);
       setIsCorrect(data.result);
     });
     socketInfo.on('ingame_change_response', (data: any) => {
       console.log('turn is over!');
       setIsTurn(data.turn);
+      setStartWord(data.startWord);
+      setInputValue('');
       console.log(data);
     });
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
+    // setIsInputValueResult(e.target.value.trim());
+    setInputValue(e.target.value.trim());
   };
 
   const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && isTurn && inputValue.charAt(0) !== startWord) {
+      setIsCorrect(false);
+      socketInfo.emit('ingame_my_input', { input: inputValue, targetUserInfo, result: false });
+      setInputValue('');
+    }
     if (e.key === 'Enter' && isTurn === 1 && inputValue.charAt(0) === startWord) {
       try {
         const res = await axios.post('http://localhost:8000/ingame/is-correct', {
@@ -43,7 +50,10 @@ function Game(props: any) {
           setIsCorrect(true);
           socketInfo.emit('ingame_my_input', { input: inputValue, targetUserInfo, result: true });
           // 1.5초 뒤에 아래 코드가 실행되도록 해주면 된다.
-          socketInfo.emit('ingame_change_request', { targetUserInfo });
+          socketInfo.emit('ingame_change_request', {
+            targetUserInfo: targetUserInfo,
+            startWord: inputValue.charAt(inputValue.length - 1),
+          });
         } else {
           setIsCorrect(false);
           socketInfo.emit('ingame_my_input', { input: inputValue, targetUserInfo, result: false });

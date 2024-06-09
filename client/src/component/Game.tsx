@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import styles from '../styles/Main.module.css';
 import btn from '../styles/MatchingReady.module.css';
@@ -9,10 +9,12 @@ function Game(props: any) {
 
   const [isTurn, setIsTurn] = useState(null);
   const [startWord, setStartWord] = useState('');
-  const [inputValueResult, setIsInputValueResult] = useState('');
   const [inputValue, setInputValue] = useState('');
+  // const [inputValueResult, setIsInputValueResult] = useState('');
   const [isCorrect, setIsCorrect] = useState(false);
   const [round] = useState(1);
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     setStartWord(initGameInfo.initWord);
@@ -28,10 +30,9 @@ function Game(props: any) {
       setInputValue('');
       console.log(data);
     });
-  }, []);
+  }, [initGameInfo, socketInfo]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // setIsInputValueResult(e.target.value.trim());
     setInputValue(e.target.value.trim());
   };
 
@@ -49,9 +50,8 @@ function Game(props: any) {
         if (res.data.message) {
           setIsCorrect(true);
           socketInfo.emit('ingame_my_input', { input: inputValue, targetUserInfo, result: true });
-          // 1.5초 뒤에 아래 코드가 실행되도록 해주면 된다.
           socketInfo.emit('ingame_change_request', {
-            targetUserInfo: targetUserInfo,
+            targetUserInfo,
             startWord: inputValue.charAt(inputValue.length - 1),
           });
         } else {
@@ -66,13 +66,29 @@ function Game(props: any) {
     }
   };
 
+  useEffect(() => {
+    if (progressBarRef.current) {
+      progressBarRef.current.style.animation = 'none';
+      progressBarRef.current.offsetHeight;
+      progressBarRef.current.style.animation = '';
+
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+
+      timerRef.current = setTimeout(() => {
+        console.log('제한 시간 끝!');
+      }, 15000);
+    }
+  }, [startWord]);
+
   return (
     <div className={`${styles.App}`}>
       <div className={`${styles.mainBody}`}>
         <div className={`${game.gameContainer}`}>
           <div className={`${btn.matchingBtn}`}>ROUND {round}</div>
           <div className={`${btn.matchingBtn} ${game.bigBox}`}>{startWord}</div>
-          <div className={`${btn.matchingBtn} ${game.bigBox}`}>${inputValue}</div>
+          <div className={`${btn.matchingBtn} ${game.bigBox}`}>{inputValue}</div>
           <div className={game.wrongWord}>
             {isCorrect ? `맞았습니다! 턴이 넘어갑니다.` : `없는 단어입니다. 다른 단어를 입력해주세요.`}
           </div>
@@ -102,6 +118,13 @@ function Game(props: any) {
             </div>
             <div>
               <div className={`${btn.matchingBtn} ${game.inputContainer}`}>
+                <div className={game.progress_container}>
+                  {isTurn === 1 ? (
+                    <div className={game.progress_bar} ref={progressBarRef} />
+                  ) : (
+                    <div className={game.progress_bar} ref={progressBarRef} style={{ background: '#929292' }} />
+                  )}
+                </div>
                 <input
                   placeholder={isTurn === 1 ? '단어를 입력해주세요.' : '입력불가'}
                   className={`${game.inputWordBox}`}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import styles from '../../styles/Board.module.css';
+import { serverUrl } from '../../config/serverUrl';
 
 interface UserInfo {
   nickname: string;
@@ -22,7 +23,7 @@ function BoardWriteComponent({ userInfo, onRegisterSuccess }: Props) {
     }
 
     try {
-      axios.post('http://localhost:8000/board/write', {
+      axios.post(`${serverUrl}/board/write`, {
         title,
         writer: userInfo.nickname,
         content,

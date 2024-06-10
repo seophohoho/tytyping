@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../../styles/OutFrame.module.css';
 import FPCenterFrame from './FPCenterFrame';
 import FPInnerFrame from './FPInnerFrame';
+import { serverUrl } from '../../config/serverUrl';
 
 function FindPasswordForm() {
   const [username, setUsername] = useState('');
@@ -40,7 +41,7 @@ function FindPasswordForm() {
         return;
       }
 
-      const response = await axios.post('http://localhost:8000/api/forgot-password/send-code', { username, email });
+      const response = await axios.post(`${serverUrl}/api/forgot-password/send-code`, { username, email });
       if (response.status === 200) {
         alert('인증 코드가 이메일로 전송되었습니다.');
         localStorage.setItem('resetEmail', email);
@@ -55,7 +56,7 @@ function FindPasswordForm() {
 
   const handleConfirm = async () => {
     try {
-      const response = await axios.post('http://localhost:8000/api/forgot-password/verify-code', {
+      const response = await axios.post(`${serverUrl}/api/forgot-password/verify-code`, {
         username,
         email,
         code: verificationCode,

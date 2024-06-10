@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import SInCenterFrame from './signComponent/SInCenterFrame';
 import SInInnerFrame from './signComponent/SInInnerFrame';
 import styles from '../styles/OutFrame.module.css';
+import { serverUrl } from '../config/serverUrl';
 
 interface FormData {
   username: string;
@@ -28,7 +29,7 @@ function SignInForm() {
         return;
       }
 
-      await axios.post('http://localhost:8000/api/sign-in', formData);
+      await axios.post(`${serverUrl}/api/sign-in`, formData);
       alert('로그인이 완료되었습니다.');
       localStorage.setItem('userData', formData.username);
       navigate('/main');

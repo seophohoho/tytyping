@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../../styles/OutFrame.module.css';
 import FUCenterFrame from './FUCenterFrame';
 import FUInnerFrame from './FUInnerFrame';
+import { serverUrl } from '../../config/serverUrl';
 
 function FindUsernameForm() {
   const [email, setEmail] = useState('');
@@ -29,7 +30,7 @@ function FindUsernameForm() {
       }
 
       // 서버로 이메일 전송
-      const response = await axios.post('http://localhost:8000/api/forgot-username', { email });
+      const response = await axios.post(`${serverUrl}/api/forgot-username`, { email });
       if (response.status === 200) {
         alert('이메일로 아이디를 전송했습니다.');
         navigate('/signin');

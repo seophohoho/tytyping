@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../styles/OutFrame.module.css';
 import SUpInnerFrame from './signComponent/SUpInnerFrame';
 import SInCenterFrame from './signComponent/SUpCenterFrame';
+import { serverUrl } from '../config/serverUrl';
 
 function SignUpForm() {
   const [formData, setFormData] = useState({
@@ -74,7 +75,7 @@ function SignUpForm() {
       }
 
       // 6. 회원가입 요청
-      const response = await axios.post('http://localhost:8000/api/sign-up', formData);
+      const response = await axios.post(`${serverUrl}/api/sign-up`, formData);
       if (response.status === 201) {
         alert('회원가입이 완료되었습니다.');
         navigate('/signin');

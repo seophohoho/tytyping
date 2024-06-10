@@ -4,6 +4,7 @@ import styles from '../styles/Main.module.css';
 import btn from '../styles/MatchingReady.module.css';
 import game from '../styles/Game.module.css';
 import { GameState } from '../constant/GameState';
+import { serverUrl } from '../config/serverUrl';
 
 function Game(props: any) {
   const { userInfo, targetUserInfo, socketInfo, setGameState, initGameInfo } = props;
@@ -54,7 +55,7 @@ function Game(props: any) {
     }
     if (e.key === 'Enter' && isTurn === 1 && inputValue.charAt(0) === startWord) {
       try {
-        const res = await axios.post('http://localhost:8000/ingame/is-correct', {
+        const res = await axios.post(`${serverUrl}/ingame/is-correct`, {
           word: inputValue,
         });
         if (res.data.message) {

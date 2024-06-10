@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../../styles/OutFrame.module.css';
 import RPCenterFrame from './RPCenterFrame';
 import RPInnerFrame from './RPInnerFrame';
+import { serverUrl } from '../../config/serverUrl';
 
 function ResetPasswordForm() {
   const [newPassword, setNewPassword] = useState('');
@@ -48,7 +49,7 @@ function ResetPasswordForm() {
       }
 
       // 서버로 새 비밀번호와 이메일 전송
-      const response = await axios.post('http://localhost:8000/api/reset-password', { email, newPassword });
+      const response = await axios.post(`${serverUrl}/api/reset-password`, { email, newPassword });
       if (response.status === 200) {
         alert('비밀번호를 성공적으로 변경했습니다.');
         navigate('/signin');

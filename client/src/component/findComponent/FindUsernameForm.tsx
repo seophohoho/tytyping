@@ -33,7 +33,7 @@ function FindUsernameForm() {
       const response = await axios.post(`${serverUrl}/api/forgot-username`, { email });
       if (response.status === 200) {
         alert('이메일로 아이디를 전송했습니다.');
-        navigate('/signin');
+        navigate('/');
       }
     } catch (error) {
       console.error('Error during forgot username:', error);

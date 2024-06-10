@@ -52,7 +52,7 @@ function ResetPasswordForm() {
       const response = await axios.post(`${serverUrl}/api/reset-password`, { email, newPassword });
       if (response.status === 200) {
         alert('비밀번호를 성공적으로 변경했습니다.');
-        navigate('/signin');
+        navigate('/');
       }
     } catch (error) {
       console.error('Error during password reset:', error);

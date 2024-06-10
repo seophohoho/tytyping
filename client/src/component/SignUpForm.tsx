@@ -78,7 +78,7 @@ function SignUpForm() {
       const response = await axios.post(`${serverUrl}/api/sign-up`, formData);
       if (response.status === 201) {
         alert('회원가입이 완료되었습니다.');
-        navigate('/signin');
+        navigate('/');
       }
     } catch (error) {
       console.error('Error during sign-up:', error);
@@ -88,7 +88,7 @@ function SignUpForm() {
 
   return (
     <div className={styles.App}>
-      <SInCenterFrame to="/signin" />
+      <SInCenterFrame to="/" />
       <SUpInnerFrame formData={formData} onChange={handleChange} onSubmit={handleSubmit} />
     </div>
   );

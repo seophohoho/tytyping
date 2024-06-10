@@ -17,7 +17,7 @@ function App() {
     <Routes>
       <Route path="/main" element={<Main />} />
       <Route path="/signup" element={<SignUpForm />} />
-      <Route path="/signin" element={<SignInForm />} />
+      <Route path="/" element={<SignInForm />} />
       <Route path="/find-username" element={<FindUsernameForm />} />
       <Route path="/find-password" element={<FindPasswordForm />} />
       <Route path="/reset-password" element={<ResetPasswordForm />} />

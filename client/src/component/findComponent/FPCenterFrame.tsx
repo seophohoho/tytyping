@@ -8,7 +8,7 @@ function FPCenterFrame() {
       <p className={styles.topText}>Forgot your password?</p>
       <div className={styles.blackLine} />
       <p className={styles.passwordexplainText}>Please enter your username & email</p>
-      <Link to="/signin" className={styles.nonlineButton}>
+      <Link to="/" className={styles.nonlineButton}>
         Sign In
       </Link>
     </div>

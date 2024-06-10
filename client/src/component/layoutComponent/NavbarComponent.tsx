@@ -23,7 +23,7 @@ function NavbarComponent(props: any) {
               <Link to="/board">Board</Link>
             </button>
             <button type="button" className={`${styles.navLink} ${styles.logout}`}>
-              <Link to="/signin">Sign Out</Link>
+              <Link to="/">Sign Out</Link>
             </button>
           </li>
         )}

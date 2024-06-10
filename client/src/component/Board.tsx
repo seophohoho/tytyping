@@ -8,7 +8,7 @@ import { serverUrl } from '../config/serverUrl';
 
 function Board() {
   const [boardState, setBoardState] = useState({ state: 'read' });
-  const [userInfo, setUserInfo] = useState({ nickname: 'test' });
+  const [userInfo, setUserInfo] = useState({ nickname: '' });
 
   useEffect(() => {
     const fetchUserInfo = async () => {

@@ -10,6 +10,7 @@ import ResetPasswordForm from './component/findComponent/ResetPasswordForm';
 import Game from './component/Game';
 import Board from './component/Board';
 import BoardDetailComponent from './component/boardComponent/BoardDetailComponent';
+import BoardEditComponent from './component/boardComponent/BoardEditComponent';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Route path="/game" element={<Game />} />
       <Route path="/board" element={<Board />} />
       <Route path="/board/:id" element={<BoardDetailComponent />} />
+      <Route path="/board/edit/:id" element={<BoardEditComponent />} />
     </Routes>
   );
 }

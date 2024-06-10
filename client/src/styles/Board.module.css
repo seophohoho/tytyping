@@ -21,6 +21,10 @@ tr {
   max-width: 800px;
 }
 
+.board_btn_container {
+  display: flex;
+}
+
 .board_header_container {
   width: 100%;
   margin-top: 10%;
@@ -42,8 +46,24 @@ tr {
   border-collapse: collapse;
 }
 
-.board_btn {
-  width: 100px;
+.board_btn1 {
+  width: 80px;
+  height: 32px;
+
+  background: #5c5c5c;
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 15px;
+
+  cursor: pointer;
+}
+
+.board_btn2 {
+  width: 80px;
   height: 32px;
 
   border: 2px solid #5c5c5c;
@@ -114,6 +134,15 @@ tr {
   margin: 16px 12px;
   padding-bottom: 12px;
   border-bottom: 1px solid #d2d2d2;
+}
+
+.board_detail_bottom {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 12px;
 }
 
 .board_detail_info {

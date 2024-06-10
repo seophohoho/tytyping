@@ -35,13 +35,22 @@ function BoardWriteComponent({ userInfo, onRegisterSuccess }: Props) {
     }
   };
 
+  const handleCancel = () => {
+    onRegisterSuccess();
+  };
+
   return (
     <div className={styles.board_container}>
       <div className={styles.board_header_container}>
         <h3 className={styles.board_title}>Issue 글쓰기</h3>
-        <button type="button" className={styles.board_btn} onClick={handleWrite}>
-          등록
-        </button>
+        <div className={styles.board_btn_container}>
+          <button type="button" className={styles.board_btn2} onClick={handleCancel} style={{ marginRight: '8px' }}>
+            취소
+          </button>
+          <button type="button" className={styles.board_btn1} onClick={handleWrite}>
+            등록
+          </button>
+        </div>
       </div>
       <div className={styles.board_write_container}>
         <input

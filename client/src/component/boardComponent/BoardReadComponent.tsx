@@ -16,6 +16,14 @@ interface BoardData {
   solve: boolean;
 }
 
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 function BoardReadComponent({ onWriteBtnClick }: BoardReadProps) {
   const [boardData, setBoardData] = useState<BoardData[]>([]);
   const navigate = useNavigate();
@@ -24,8 +32,11 @@ function BoardReadComponent({ onWriteBtnClick }: BoardReadProps) {
     async function fetchBoardData() {
       try {
         const response = await axios.post(`${serverUrl}/board/readBoard`);
-        console.log(response.data);
-        setBoardData(response.data);
+        const formattedData = response.data.map((board: BoardData) => ({
+          ...board,
+          date: formatDate(board.date),
+        }));
+        setBoardData(formattedData);
       } catch (error) {
         console.error('Error: ', error);
       }
@@ -42,7 +53,7 @@ function BoardReadComponent({ onWriteBtnClick }: BoardReadProps) {
     <div className={styles.board_container}>
       <div className={styles.board_header_container}>
         <h3 className={styles.board_title}>Issue 게시판</h3>
-        <button type="button" tabIndex={0} className={styles.board_btn} onClick={onWriteBtnClick}>
+        <button type="button" tabIndex={0} className={styles.board_btn1} onClick={onWriteBtnClick}>
           글쓰기
         </button>
       </div>

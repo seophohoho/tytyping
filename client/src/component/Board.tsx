@@ -6,7 +6,8 @@ import BoardReadComponent from './boardComponent/BoardReadComponent';
 import BoardWriteComponent from './boardComponent/BoardWriteComponent';
 import { serverUrl } from '../config/serverUrl';
 
-function Board() {
+function Board(props: any) {
+  const { targetUserInfo, socketInfo } = props;
   const [boardState, setBoardState] = useState({ state: 'read' });
   const [userInfo, setUserInfo] = useState({ nickname: '' });
 

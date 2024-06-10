@@ -179,12 +179,26 @@ rootRoom.on("connection", (socket) => {
   });
 
   socket.on("ingame_result_request", (data: any) => {
+    allUsers[socket.id].state = "none";
+    allUsers[socket.id].turn = -1;
+    allUsers[data.targetUserInfo.socketId].state = "none";
+    allUsers[data.targetUserInfo.socketId].turn = -1;
     rootRoom.to(socket.id).emit("ingame_result_response", { result: 0 });
     rootRoom
       .to(data.targetUserInfo.socketId)
       .emit("ingame_result_response", { result: 1 });
   });
 
+  socket.on("exit_request", (data: any) => {
+    allUsers[socket.id].state = "none";
+    allUsers[socket.id].turn = -1;
+    allUsers[data.targetUserInfo.socketId].state = "none";
+    allUsers[data.targetUserInfo.socketId].turn = -1;
+    console.log(data);
+    rootRoom
+      .to(data.targetUserInfo.socketId)
+      .emit("exit_response", { result: 0 });
+  });
   socket.on("disconnect", (data: any) => {
     delete allUsers[socket.id];
   });

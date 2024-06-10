@@ -63,6 +63,12 @@ function Main() {
       setGameState(GameState.INGAME);
     });
 
+    rootSocket.on('exit_response', (data: any) => {
+      alert('상대방이 나감.');
+      console.log(data);
+      setGameState(GameState.NONE);
+    });
+
     return () => {
       rootSocket.off('connect');
       rootSocket.off('disconnect');
@@ -103,7 +109,7 @@ function Main() {
           />
         );
       case GameState.BOARD:
-        return <Board />;
+        return <Board targetUserInfo={targetUserInfo} socketInfo={socketInfo} />;
       default:
         return null;
     }
@@ -111,7 +117,7 @@ function Main() {
 
   return (
     <div className={styles.App}>
-      <NavbarComponent userInfo={userInfo.nickname} />
+      <NavbarComponent userInfo={userInfo.nickname} gameState={gameState} />
       <div className={styles.mainBody}>{renderComponent()}</div>
     </div>
   );

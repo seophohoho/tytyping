@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom';
 import styles from '../../styles/Navbar.module.css';
+import { GameState } from '../../constant/GameState';
 
 function NavbarComponent(props: any) {
-  const { userInfo } = props;
+  const { userInfo, gameState } = props;
+
+  const shouldHideButtons =
+    gameState === GameState.INGAME || gameState === GameState.MATCHING || gameState === GameState.MATCHING_READY;
+
   return (
     <div className={`${styles.navbar}`}>
       <a href="#home" className={`${styles.navMenu} ${styles.logo}`}>
@@ -12,14 +17,16 @@ function NavbarComponent(props: any) {
         <li>
           <p className={`${styles.navLink}`}>{userInfo}</p>
         </li>
-        <li>
-          <button type="button" className={`${styles.navLink} ${styles.logout}`} style={{ margin: '0 10px 0 0' }}>
-            <Link to="/board">Board</Link>
-          </button>
-          <button type="button" className={`${styles.navLink} ${styles.logout}`}>
-            Log Out
-          </button>
-        </li>
+        {!shouldHideButtons && (
+          <li>
+            <button type="button" className={`${styles.navLink} ${styles.logout}`} style={{ margin: '0 10px 0 0' }}>
+              <Link to="/board">Board</Link>
+            </button>
+            <button type="button" className={`${styles.navLink} ${styles.logout}`}>
+              Log Out
+            </button>
+          </li>
+        )}
       </ul>
     </div>
   );

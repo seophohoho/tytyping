@@ -8,7 +8,7 @@ function MatchedUserBox(props: any) {
 
   const readyListener = () => {
     setBtnClick(!btnClick);
-    socketInfo.emit('matching-ready', { user: targetUserInfo, state: !btnClick });
+    socketInfo.emit('waiting_my_state', { userInfo: targetUserInfo, state: !btnClick });
   };
 
   useEffect(() => {

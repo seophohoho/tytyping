@@ -10,6 +10,8 @@ import NoneMatchingComponent from './commonComponent/NoneMatchingComponent';
 
 import MatchingReadyComponent from './matchingComponent/MatchingReadyComponent';
 import styles from '../styles/Main.module.css';
+import Game from './Game';
+import Board from './Board';
 
 function Main() {
   const [socketInfo, setSocketInfo] = useState<Socket | null>(null);
@@ -18,13 +20,15 @@ function Main() {
   const [gameState, setGameState] = useState(GameState.NONE);
   const [targetUserInfo, setTargetUserInfo] = useState({ nickname: '' });
 
+  const [initGameInfo, setInitGameInfo] = useState({});
   // 컴포넌트 mount 시 동작
   useEffect(() => {
     // user정보 업데이트 함수
     const fetchUserInfo = async () => {
       try {
-        const res = await axios.post(`${serverUrl}/userinfo`, { username: 'test' }); // 차후 수정 필요. 닉네임 test인 유저 검색.
+        const res = await axios.post(`${serverUrl}/userinfo`, { username: localStorage.getItem('userData') }); // 차후 수정 필요. 닉네임 test인 유저 검색.
         if (res.status === 200) {
+          console.log(res.data);
           setUserInfo({ nickname: res.data });
           setIsUserInfoSet(true);
         }
@@ -52,6 +56,17 @@ function Main() {
 
     rootSocket.on('disconnect', () => {
       console.log('socket disconnected');
+    });
+
+    rootSocket.on('game_start', (data: any) => {
+      setInitGameInfo(data);
+      setGameState(GameState.INGAME);
+    });
+
+    rootSocket.on('exit_response', (data: any) => {
+      alert('상대방이 나감.');
+      console.log(data);
+      setGameState(GameState.NONE);
     });
 
     return () => {
@@ -83,6 +98,18 @@ function Main() {
             targetUserInfo={targetUserInfo}
           />
         );
+      case GameState.INGAME:
+        return (
+          <Game
+            userInfo={userInfo}
+            targetUserInfo={targetUserInfo}
+            socketInfo={socketInfo}
+            setGameState={setGameState}
+            initGameInfo={initGameInfo}
+          />
+        );
+      case GameState.BOARD:
+        return <Board targetUserInfo={targetUserInfo} socketInfo={socketInfo} />;
       default:
         return null;
     }
@@ -90,7 +117,7 @@ function Main() {
 
   return (
     <div className={styles.App}>
-      <NavbarComponent userInfo={userInfo.nickname} />
+      <NavbarComponent userInfo={userInfo.nickname} gameState={gameState} />
       <div className={styles.mainBody}>{renderComponent()}</div>
     </div>
   );

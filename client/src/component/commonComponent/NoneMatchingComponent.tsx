@@ -6,8 +6,8 @@ function NoneMatchingComponent(props: any) {
 
   const matchingBtnListner = () => {
     setGameState(GameState.MATCHING);
-    socketInfo.emit('start-matching', { nickname: userInfo.nickname, socketId: socketInfo.id });
-    socketInfo.on('match-success', (data: any) => {
+    socketInfo.emit('matching_start', { nickname: userInfo.nickname, socketId: socketInfo.id });
+    socketInfo.on('matching_success', (data: any) => {
       setTargetUserInfo({ socketId: data.socketId, nickname: data.nickname });
       setGameState(GameState.MATCHING_READY);
     });

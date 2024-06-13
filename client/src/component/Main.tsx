@@ -109,7 +109,7 @@ function Main() {
           />
         );
       case GameState.BOARD:
-        return <Board targetUserInfo={targetUserInfo} socketInfo={socketInfo} />;
+        return <Board />;
       default:
         return null;
     }
